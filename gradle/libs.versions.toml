@@ -9,22 +9,29 @@ composeMultiplatform = "1.10.0-rc02"
 kotlin = "2.2.21"
 kotlinSerialization = "2.1.21"
 kotlinxSerializationCore = "1.8.1"
+material3 = "1.9.0"
 materialKolor = "4.0.0"
 navigation3 = "1.0.0"
 
 [libraries]
 androidxActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
-androidxLifecycleViewModelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidxLifecycleRuntimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidxLifecycleViewModelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidxNavigation3Runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "navigation3" }
 androidxNavigation3Ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "navigation3" }
+composeComponentsResources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "composeMultiplatform" }
+composeFoundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "composeMultiplatform" }
+composeMaterial3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
+composeRuntime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeMultiplatform" }
+composeUi = { module = "org.jetbrains.compose.ui:ui", version.ref = "composeMultiplatform" }
+composeUiToolingPreview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "composeMultiplatform" }
 kotlinxSerializationCore = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
 materialKolor = { module = "com.materialkolor:material-kolor", version.ref = "materialKolor" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization"}
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
