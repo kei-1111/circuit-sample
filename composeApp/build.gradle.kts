@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -37,6 +38,9 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidxLifecycleViewModelCompose)
             implementation(libs.androidxLifecycleRuntimeCompose)
+            implementation(libs.androidxNavigation3Ui)
+            implementation(libs.androidxNavigation3Runtime)
+            implementation(libs.kotlinxSerializationCore)
             implementation(libs.materialKolor)
         }
     }
