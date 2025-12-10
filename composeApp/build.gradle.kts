@@ -1,14 +1,19 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinParcelize)
     alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
+    compilerOptions {
+        freeCompilerArgs.addAll("-P", "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation=io.github.kei_1111.circuit.sample.core.common.CommonParcelize")
+    }
+
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_21)
@@ -32,7 +37,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.androidxLifecycleViewModelCompose)
             implementation(libs.androidxLifecycleRuntimeCompose)
-            implementation(libs.androidxNavigation3Ui)
+            implementation(libs.circuitFoundation)
             implementation(libs.composeComponentsResources)
             implementation(libs.composeFoundation)
             implementation(libs.composeMaterial3)
