@@ -11,14 +11,13 @@ kotlinSerialization = "2.1.21"
 kotlinxSerializationCore = "1.8.1"
 material3 = "1.9.0"
 materialKolor = "4.0.0"
-navigation3 = "1.0.0"
+navigation3 = "1.0.0-alpha06"
 
 [libraries]
 androidxActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 androidxLifecycleRuntimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidxLifecycleViewModelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
-androidxNavigation3Runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "navigation3" }
-androidxNavigation3Ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "navigation3" }
+androidxNavigation3Ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "navigation3" }
 composeComponentsResources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "composeMultiplatform" }
 composeFoundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "composeMultiplatform" }
 composeMaterial3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }

@@ -33,7 +33,6 @@ kotlin {
             implementation(libs.androidxLifecycleViewModelCompose)
             implementation(libs.androidxLifecycleRuntimeCompose)
             implementation(libs.androidxNavigation3Ui)
-            implementation(libs.androidxNavigation3Runtime)
             implementation(libs.composeComponentsResources)
             implementation(libs.composeFoundation)
             implementation(libs.composeMaterial3)
