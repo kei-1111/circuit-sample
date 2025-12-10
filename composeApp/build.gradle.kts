@@ -30,16 +30,16 @@ kotlin {
             implementation(libs.androidxActivityCompose)
         }
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
             implementation(libs.androidxLifecycleViewModelCompose)
             implementation(libs.androidxLifecycleRuntimeCompose)
             implementation(libs.androidxNavigation3Ui)
             implementation(libs.androidxNavigation3Runtime)
+            implementation(libs.composeComponentsResources)
+            implementation(libs.composeFoundation)
+            implementation(libs.composeMaterial3)
+            implementation(libs.composeRuntime)
+            implementation(libs.composeUi)
+            implementation(libs.composeUiToolingPreview)
             implementation(libs.kotlinxSerializationCore)
             implementation(libs.materialKolor)
         }
