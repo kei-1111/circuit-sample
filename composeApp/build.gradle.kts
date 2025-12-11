@@ -72,3 +72,7 @@ android {
         }
     }
 }
+
+dependencies {
+    debugImplementation(libs.composeUiTooling)
+}

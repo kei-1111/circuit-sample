@@ -23,6 +23,7 @@ composeFoundation = { module = "org.jetbrains.compose.foundation:foundation", ve
 composeMaterial3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
 composeRuntime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeMultiplatform" }
 composeUi = { module = "org.jetbrains.compose.ui:ui", version.ref = "composeMultiplatform" }
+composeUiTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "composeMultiplatform" }
 composeUiToolingPreview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "composeMultiplatform" }
 kotlinxSerializationCore = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
 materialKolor = { module = "com.materialkolor:material-kolor", version.ref = "materialKolor" }
