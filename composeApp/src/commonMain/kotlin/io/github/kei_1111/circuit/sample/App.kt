@@ -8,8 +8,6 @@ import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.foundation.CircuitCompositionLocals
 import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.foundation.rememberCircuitNavigator
-import com.slack.circuit.retained.LocalRetainedStateRegistry
-import com.slack.circuit.retained.rememberRetainedStateRegistry
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSample
 import io.github.kei_1111.circuit.sample.feature.home.HomeScreen
 
@@ -23,13 +21,8 @@ fun App() {
     val backStack = rememberSaveableBackStack(HomeScreen)
     val navigator = rememberCircuitNavigator(backStack) {}
 
-    val retainedStateRegistry = rememberRetainedStateRegistry()
-
     CircuitSample {
-        CircuitCompositionLocals(
-            circuit = circuit,
-            retainedStateRegistry = retainedStateRegistry,
-        ) {
+        CircuitCompositionLocals(circuit) {
             NavigableCircuitContent(navigator, backStack)
         }
     }
