@@ -26,7 +26,7 @@ class HomeUiFactory : Ui.Factory {
         context: CircuitContext
     ): Ui<*>? {
         return when(screen) {
-            is HomeScreen -> ui<HomeUiState> { state, modifier -> HomeUI(state, modifier) }
+            is HomeScreen -> ui<HomeState> { state, modifier -> Home(state, modifier) }
             else -> null
         }
     }

@@ -20,15 +20,11 @@ import androidx.compose.ui.unit.dp
 import circuit_sample.composeapp.generated.resources.Res
 import circuit_sample.composeapp.generated.resources.ic_add
 import circuit_sample.composeapp.generated.resources.ic_remove
-import com.slack.circuit.runtime.CircuitContext
-import com.slack.circuit.runtime.screen.Screen
-import com.slack.circuit.runtime.ui.Ui
-import com.slack.circuit.runtime.ui.ui
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun HomeUI(
-    state: HomeUiState,
+fun Home(
+    state: HomeState,
     modifier: Modifier = Modifier,
 ) {
     Surface(modifier = modifier) {
@@ -38,7 +34,7 @@ fun HomeUI(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             IconButton(
-                onClick = { state.eventSink(HomeUiEvent.Decrease) },
+                onClick = { state.eventSink(HomeEvent.Decrease) },
                 colors = IconButtonDefaults.iconButtonColors(
                     containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                     contentColor = MaterialTheme.colorScheme.onTertiaryContainer
@@ -58,7 +54,7 @@ fun HomeUI(
                 )
             )
             IconButton(
-                onClick = { state.eventSink(HomeUiEvent.Increase) },
+                onClick = { state.eventSink(HomeEvent.Increase) },
                 colors = IconButtonDefaults.iconButtonColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     contentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -75,9 +71,9 @@ fun HomeUI(
 
 @Composable
 @Preview
-private fun HomeUIPreview() {
-    HomeUI(
-        state = HomeUiState(
+private fun HomePreview() {
+    Home(
+        state = HomeState(
             count = 10,
             eventSink = {}
         )
