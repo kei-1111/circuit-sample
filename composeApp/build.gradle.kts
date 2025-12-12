@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -7,7 +8,12 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinParcelize)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.metro)
+}
+
+ksp {
+    arg("circuit.codegen.mode", "metro")
 }
 
 kotlin {
@@ -39,6 +45,7 @@ kotlin {
             implementation(libs.androidxDataStorePreferences)
             implementation(libs.androidxLifecycleViewModelCompose)
             implementation(libs.androidxLifecycleRuntimeCompose)
+            implementation(libs.circuitCodegenAnnotations)
             implementation(libs.circuitFoundation)
             implementation(libs.composeComponentsResources)
             implementation(libs.composeFoundation)
@@ -49,6 +56,16 @@ kotlin {
             implementation(libs.kotlinxSerializationCore)
             implementation(libs.materialKolor)
         }
+    }
+}
+
+dependencies {
+    add("kspCommonMainMetadata", libs.circuitCodegen)
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
     }
 }
 
