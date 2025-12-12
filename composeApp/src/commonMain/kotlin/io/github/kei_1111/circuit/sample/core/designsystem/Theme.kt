@@ -10,7 +10,7 @@ import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 private val SeedColor = Color(0xFF0700FF)
 
 @Composable
-fun CircuitSample(
+fun CircuitSampleTheme(
     seedColor: Color = SeedColor,
     theme: UserPreferences.Theme = UserPreferences.Theme.SYSTEM,
     content: @Composable () -> Unit

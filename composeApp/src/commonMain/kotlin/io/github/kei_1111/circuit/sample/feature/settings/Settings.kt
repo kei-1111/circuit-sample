@@ -20,7 +20,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSample
+import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import io.github.kei_1111.circuit.sample.feature.settings.component.SettingsSection
 import io.github.kei_1111.circuit.sample.feature.settings.component.SettingsTopAppBar
@@ -44,7 +44,7 @@ fun Settings(
         }
     }
 
-    CircuitSample(theme = state.theme) {
+    CircuitSampleTheme(theme = state.theme) {
         Scaffold(
             modifier = modifier,
             topBar = {

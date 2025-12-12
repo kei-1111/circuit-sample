@@ -25,7 +25,7 @@ import circuit_sample.composeapp.generated.resources.Res
 import circuit_sample.composeapp.generated.resources.ic_dark_mode
 import circuit_sample.composeapp.generated.resources.ic_light_mode
 import circuit_sample.composeapp.generated.resources.ic_system
-import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSample
+import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import org.jetbrains.compose.resources.painterResource
 
@@ -76,7 +76,7 @@ fun SettingItem(
 private fun SettingItemPreview(
     @PreviewParameter(SettingsItemPPP::class) parameter: SettingsItemPreviewParameter
 ) {
-    CircuitSample {
+    CircuitSampleTheme {
         Surface {
             SettingItem(
                 config = parameter.config,

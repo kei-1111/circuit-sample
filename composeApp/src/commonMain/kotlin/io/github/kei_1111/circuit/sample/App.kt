@@ -10,7 +10,7 @@ import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.foundation.CircuitCompositionLocals
 import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.foundation.rememberCircuitNavigator
-import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSample
+import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import io.github.kei_1111.circuit.sample.di.AppGraph
 import io.github.kei_1111.circuit.sample.feature.home.HomeScreen
@@ -28,7 +28,7 @@ fun App(appGraph: AppGraph) {
 
     val themeConfig by appGraph.userPreferencesRepository.theme.collectAsState(UserPreferences.Theme.SYSTEM)
 
-    CircuitSample(
+    CircuitSampleTheme(
         theme = themeConfig
     ) {
         CircuitCompositionLocals(circuit) {
