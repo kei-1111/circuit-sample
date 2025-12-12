@@ -7,14 +7,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.CircuitUiEvent
 import com.slack.circuit.runtime.CircuitUiState
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.screen.Screen
+import dev.zacsweers.metro.Assisted
+import dev.zacsweers.metro.Inject
 import io.github.kei_1111.circuit.sample.core.common.CommonParcelize
 import io.github.kei_1111.circuit.sample.core.data.UserPreferencesRepository
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
+import io.github.kei_1111.circuit.sample.di.AppScope
 import kotlinx.coroutines.launch
 
 @CommonParcelize
@@ -38,8 +42,9 @@ sealed interface SettingsEvent : CircuitUiEvent {
     data class UpdateTheme(val theme: UserPreferences.Theme) : SettingsEvent
 }
 
-class SettingsPresenter(
-    private val navigator: Navigator,
+@CircuitInject(SettingsScreen::class, AppScope::class)
+class SettingsPresenter @Inject constructor(
+    @Assisted private val navigator: Navigator,
     private val userPreferencesRepository: UserPreferencesRepository,
 ) : Presenter<SettingsState> {
     @Composable
