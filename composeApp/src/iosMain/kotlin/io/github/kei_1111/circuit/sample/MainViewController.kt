@@ -9,5 +9,5 @@ import io.github.kei_1111.circuit.sample.di.IosPlatformGraph
 fun MainViewController() = ComposeUIViewController {
     val platformGraph = createGraph<IosPlatformGraph>()
     val appGraph = createGraphFactory<AppGraph.Factory>().create(platformGraph)
-    App(appGraph)
+    appGraph.app()
 }
