@@ -4,6 +4,7 @@ androidCompileSdk = "36"
 androidMinSdk = "24"
 androidTargetSdk = "36"
 androidxActivity = "1.12.0"
+androidxDataStore = "1.1.7"
 androidxLifecycle = "2.9.6"
 circuit = "0.28.0"
 composeMultiplatform = "1.10.0-rc02"
@@ -12,8 +13,10 @@ kotlinSerialization = "2.1.21"
 kotlinxSerializationCore = "1.8.1"
 material3 = "1.9.0"
 materialKolor = "4.0.0"
+metro = "0.8.2"
 
 [libraries]
+androidxDataStorePreferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "androidxDataStore" }
 androidxActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 androidxLifecycleRuntimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidxLifecycleViewModelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
@@ -36,3 +39,4 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMul
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinParcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
+metro = { id = "dev.zacsweers.metro", version.ref = "metro" }

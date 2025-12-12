@@ -1,35 +1,38 @@
 package io.github.kei_1111.circuit.sample
 
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import com.slack.circuit.backstack.rememberSaveableBackStack
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.foundation.CircuitCompositionLocals
 import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.foundation.rememberCircuitNavigator
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSample
+import io.github.kei_1111.circuit.sample.core.model.UserPreferences
+import io.github.kei_1111.circuit.sample.di.AppGraph
 import io.github.kei_1111.circuit.sample.feature.home.HomeScreen
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun App() {
-    val circuit = Circuit.Builder()
-        .addPresenterFactory(PresenterFactory())
-        .addUiFactory(UiFactory())
-        .build()
+fun App(appGraph: AppGraph) {
+    val circuit = remember(appGraph) {
+        Circuit.Builder()
+            .addPresenterFactory(PresenterFactory(appGraph.userPreferencesRepository))
+            .addUiFactory(UiFactory())
+            .build()
+    }
     val backStack = rememberSaveableBackStack(HomeScreen)
     val navigator = rememberCircuitNavigator(backStack) {}
 
-    CircuitSample {
+    val themeConfig by appGraph.userPreferencesRepository.theme.collectAsState(UserPreferences.Theme.SYSTEM)
+
+    CircuitSample(
+        theme = themeConfig
+    ) {
         CircuitCompositionLocals(circuit) {
-            NavigableCircuitContent(navigator, backStack)
+            Surface { NavigableCircuitContent(navigator, backStack) }
         }
     }
-}
-
-@Preview
-@Composable
-fun AppPreview() {
-    App()
 }
