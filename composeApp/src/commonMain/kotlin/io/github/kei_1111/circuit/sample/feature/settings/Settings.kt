@@ -20,12 +20,15 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.slack.circuit.codegen.annotations.CircuitInject
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
+import io.github.kei_1111.circuit.sample.di.AppScope
 import io.github.kei_1111.circuit.sample.feature.settings.component.SettingsSection
 import io.github.kei_1111.circuit.sample.feature.settings.component.SettingsTopAppBar
 import kotlinx.coroutines.launch
 
+@CircuitInject(SettingsScreen::class, AppScope::class)
 @Composable
 fun Settings(
     state: SettingsState,
