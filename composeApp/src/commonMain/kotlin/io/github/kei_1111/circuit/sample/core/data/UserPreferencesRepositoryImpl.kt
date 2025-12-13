@@ -14,11 +14,7 @@ class UserPreferencesRepositoryImpl(
 ) : UserPreferencesRepository {
     private companion object {
         val THEME_KEY = stringPreferencesKey("theme")
-        val COLOR_TYPE_KEY = stringPreferencesKey("color_type")
-        val COLOR_ARGB_KEY = longPreferencesKey("color_argb")
-
-        const val COLOR_TYPE_DEFAULT = "default"
-        const val COLOR_TYPE_CUSTOM = "custom"
+        val SEED_COLOR_ARGB_KEY = longPreferencesKey("seed_color_argb")
     }
 
     override val theme: Flow<UserPreferences.Theme> = dataStore.data.map { preferences ->
@@ -26,14 +22,8 @@ class UserPreferencesRepositoryImpl(
         UserPreferences.Theme.valueOf(themeString)
     }
 
-    override val color: Flow<UserPreferences.Color> = dataStore.data.map { preferences ->
-        when (preferences[COLOR_TYPE_KEY]) {
-            COLOR_TYPE_CUSTOM -> {
-                val argb = preferences[COLOR_ARGB_KEY] ?: 0xFF0700FF
-                UserPreferences.Color.Custom(argb)
-            }
-            else -> UserPreferences.Color.Default
-        }
+    override val customSeedColorArgb: Flow<Long?> = dataStore.data.map { preferences ->
+        preferences[SEED_COLOR_ARGB_KEY]
     }
 
     override suspend fun setTheme(theme: UserPreferences.Theme) {
@@ -42,17 +32,12 @@ class UserPreferencesRepositoryImpl(
         }
     }
 
-    override suspend fun setColor(color: UserPreferences.Color) {
+    override suspend fun setCustomSeedColorArgb(argb: Long?) {
         dataStore.edit { preferences ->
-            when (color) {
-                is UserPreferences.Color.Default -> {
-                    preferences[COLOR_TYPE_KEY] = COLOR_TYPE_DEFAULT
-                    preferences.remove(COLOR_ARGB_KEY)
-                }
-                is UserPreferences.Color.Custom -> {
-                    preferences[COLOR_TYPE_KEY] = COLOR_TYPE_CUSTOM
-                    preferences[COLOR_ARGB_KEY] = color.argb
-                }
+            if (argb != null) {
+                preferences[SEED_COLOR_ARGB_KEY] = argb
+            } else {
+                preferences.remove(SEED_COLOR_ARGB_KEY)
             }
         }
     }

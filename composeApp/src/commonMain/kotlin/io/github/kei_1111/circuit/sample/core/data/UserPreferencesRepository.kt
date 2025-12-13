@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserPreferencesRepository {
     val theme: Flow<UserPreferences.Theme>
-    val color: Flow<UserPreferences.Color>
+    val customSeedColorArgb: Flow<Long?>
     suspend fun setTheme(theme: UserPreferences.Theme)
-    suspend fun setColor(color: UserPreferences.Color)
+    suspend fun setCustomSeedColorArgb(argb: Long?)
 }

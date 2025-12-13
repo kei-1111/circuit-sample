@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -18,16 +19,19 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.slack.circuit.codegen.annotations.CircuitInject
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import io.github.kei_1111.circuit.sample.di.AppScope
+import io.github.kei_1111.circuit.sample.feature.settings.component.ColorPickerBottomSheet
 import io.github.kei_1111.circuit.sample.feature.settings.component.SettingsSection
 import io.github.kei_1111.circuit.sample.feature.settings.component.SettingsTopAppBar
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @CircuitInject(SettingsScreen::class, AppScope::class)
 @Composable
 fun Settings(
@@ -47,7 +51,20 @@ fun Settings(
         }
     }
 
-    CircuitSampleTheme(theme = state.theme) {
+    CircuitSampleTheme(
+        seedColor = state.seedColor.color,
+        theme = state.theme
+    ) {
+        if (state.showColorPicker) {
+            ColorPickerBottomSheet(
+                initialColor = state.seedColor.color,
+                onDismiss = { state.eventSink(SettingsEvent.HideColorPicker) },
+                onChangeColor = { color ->
+                    state.eventSink(SettingsEvent.UpdateSeedColor(UserPreferences.SeedColor.Custom(color)))
+                },
+            )
+        }
+
         Scaffold(
             modifier = modifier,
             topBar = {
@@ -69,6 +86,25 @@ fun Settings(
                     items = UserPreferences.Theme.entries,
                     selectedItem = state.theme,
                     onItemClick = { state.eventSink(SettingsEvent.UpdateTheme(it)) }
+                )
+                SettingsSection(
+                    title = "アプリ カラー",
+                    items = listOf(
+                        UserPreferences.SeedColor.Default,
+                        (state.seedColor as? UserPreferences.SeedColor.Custom)
+                            ?: UserPreferences.SeedColor.Custom(Color(-6259457))
+                    ),
+                    selectedItem = state.seedColor,
+                    onItemClick = { seedColor ->
+                        when (seedColor) {
+                            is UserPreferences.SeedColor.Default -> {
+                                state.eventSink(SettingsEvent.UpdateSeedColor(seedColor))
+                            }
+                            is UserPreferences.SeedColor.Custom -> {
+                                state.eventSink(SettingsEvent.ShowColorPicker)
+                            }
+                        }
+                    }
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 FilledTonalButton(
