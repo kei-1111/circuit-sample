@@ -12,17 +12,17 @@ class UserPreferencesRepositoryImpl(
     private val dataStore: DataStore<Preferences>
 ) : UserPreferencesRepository {
     private companion object {
-        val THEME_CONFIG_KEY = stringPreferencesKey("theme_config")
+        val THEME_KEY = stringPreferencesKey("theme")
     }
 
     override val theme: Flow<UserPreferences.Theme> = dataStore.data.map { preferences ->
-        val themeString = preferences[THEME_CONFIG_KEY] ?: UserPreferences.Theme.SYSTEM.name
+        val themeString = preferences[THEME_KEY] ?: UserPreferences.Theme.SYSTEM.name
         UserPreferences.Theme.valueOf(themeString)
     }
 
-    override suspend fun setTheme(themeConfig: UserPreferences.Theme) {
+    override suspend fun setTheme(theme: UserPreferences.Theme) {
         dataStore.edit { preferences ->
-            preferences[THEME_CONFIG_KEY] = themeConfig.name
+            preferences[THEME_KEY] = theme.name
         }
     }
 }

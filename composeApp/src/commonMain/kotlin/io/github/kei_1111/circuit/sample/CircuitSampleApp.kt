@@ -24,9 +24,9 @@ class CircuitSampleApp(
     operator fun invoke() {
         val backStack = rememberSaveableBackStack(HomeScreen)
         val navigator = rememberCircuitNavigator(backStack) {}
-        val themeConfig by getThemeUseCase().collectAsState(UserPreferences.Theme.SYSTEM)
+        val theme by getThemeUseCase().collectAsState(UserPreferences.Theme.SYSTEM)
 
-        CircuitSampleTheme(theme = themeConfig) {
+        CircuitSampleTheme(theme = theme) {
             CircuitCompositionLocals(circuit) {
                 Surface { NavigableCircuitContent(navigator, backStack) }
             }

@@ -31,12 +31,12 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun SettingItem(
-    config: UserPreferences,
+    userPreferences: UserPreferences,
     selected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val (icon, label) = when (config) {
+    val (icon, label) = when (userPreferences) {
         UserPreferences.Theme.SYSTEM -> Res.drawable.ic_system to "端末のテーマ"
         UserPreferences.Theme.LIGHT -> Res.drawable.ic_light_mode to "ライトテーマ"
         UserPreferences.Theme.DARK -> Res.drawable.ic_dark_mode to "ダークテーマ"
@@ -79,7 +79,7 @@ private fun SettingItemPreview(
     CircuitSampleTheme {
         Surface {
             SettingItem(
-                config = parameter.config,
+                userPreferences = parameter.userPreferences,
                 selected = parameter.selected,
                 onClick = {}
             )
@@ -88,18 +88,18 @@ private fun SettingItemPreview(
 }
 
 private data class SettingsItemPreviewParameter(
-    val config: UserPreferences,
+    val userPreferences: UserPreferences,
     val selected: Boolean,
 )
 
 private class SettingsItemPPP : CollectionPreviewParameterProvider<SettingsItemPreviewParameter>(
     collection = listOf(
         SettingsItemPreviewParameter(
-            config = UserPreferences.Theme.DARK,
+            userPreferences = UserPreferences.Theme.DARK,
             selected = true,
         ),
         SettingsItemPreviewParameter(
-            config = UserPreferences.Theme.LIGHT,
+            userPreferences = UserPreferences.Theme.LIGHT,
             selected = false,
         )
     )

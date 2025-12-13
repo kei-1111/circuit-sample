@@ -39,7 +39,7 @@ fun <T : UserPreferences> SettingsSection(
             Column {
                 items.forEachIndexed { index, item ->
                     SettingItem(
-                        config = item,
+                        userPreferences = item,
                         selected = item == selectedItem,
                         onClick = { onItemClick(item) }
                     )
