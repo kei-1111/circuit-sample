@@ -12,11 +12,20 @@ composeMultiplatform = "1.10.0-rc02"
 kotlin = "2.2.21"
 kotlinSerialization = "2.1.21"
 kotlinxSerializationCore = "1.8.1"
+ksp = "2.2.21-2.0.4"
 material3 = "1.9.0"
 materialKolor = "4.0.0"
 metro = "0.8.2"
 
 [libraries]
+# build-logic dependencies
+androidGradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+kotlinGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+composeGradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "composeMultiplatform" }
+kspGradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
+metroGradle = { module = "dev.zacsweers.metro:dev.zacsweers.metro.gradle.plugin", version.ref = "metro" }
+
+# app dependencies
 androidxDataStorePreferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "androidxDataStore" }
 androidxActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 androidxLifecycleRuntimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
@@ -41,7 +50,12 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 kotlinParcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
-ksp = { id = "com.google.devtools.ksp", version = "2.2.21-2.0.4" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
+
+# Convention Plugins
+circuitSampleKmpLibrary = { id = "circuitsample.kmp.library" }
+circuitSampleKmpFeature = { id = "circuitsample.kmp.feature" }

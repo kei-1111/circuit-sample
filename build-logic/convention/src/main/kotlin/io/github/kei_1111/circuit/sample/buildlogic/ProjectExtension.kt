@@ -1,0 +1,28 @@
+package io.github.kei_1111.circuit.sample.buildlogic
+
+import org.gradle.api.Project
+import org.gradle.api.artifacts.Dependency
+import org.gradle.api.artifacts.MinimalExternalModuleDependency
+import org.gradle.api.artifacts.VersionCatalog
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.kotlin.dsl.getByType
+import org.gradle.plugin.use.PluginDependency
+
+internal fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? =
+    add("implementation", dependencyNotation)
+
+internal fun DependencyHandler.debugImplementation(dependencyNotation: Any): Dependency? =
+    add("debugImplementation", dependencyNotation)
+
+internal val Project.libs
+    get(): VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
+
+internal fun VersionCatalog.versions(name: String): String =
+    this.findVersion(name).get().requiredVersion
+
+internal fun VersionCatalog.library(name: String): MinimalExternalModuleDependency =
+    this.findLibrary(name).get().get()
+
+internal fun VersionCatalog.plugin(name: String): PluginDependency =
+    this.findPlugin(name).get().get()
