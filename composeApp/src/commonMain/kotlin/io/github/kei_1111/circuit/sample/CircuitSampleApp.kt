@@ -10,21 +10,21 @@ import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.backstack.rememberSaveableBackStack
 import com.slack.circuit.foundation.rememberCircuitNavigator
 import dev.zacsweers.metro.Inject
-import io.github.kei_1111.circuit.sample.core.data.UserPreferencesRepository
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
+import io.github.kei_1111.circuit.sample.core.domain.GetThemeUseCase
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import io.github.kei_1111.circuit.sample.feature.home.HomeScreen
 
 @Inject
 class CircuitSampleApp(
     private val circuit: Circuit,
-    private val userPreferencesRepository: UserPreferencesRepository,
+    private val getThemeUseCase: GetThemeUseCase,
 ) {
     @Composable
     operator fun invoke() {
         val backStack = rememberSaveableBackStack(HomeScreen)
         val navigator = rememberCircuitNavigator(backStack) {}
-        val themeConfig by userPreferencesRepository.theme.collectAsState(UserPreferences.Theme.SYSTEM)
+        val themeConfig by getThemeUseCase().collectAsState(UserPreferences.Theme.SYSTEM)
 
         CircuitSampleTheme(theme = themeConfig) {
             CircuitCompositionLocals(circuit) {

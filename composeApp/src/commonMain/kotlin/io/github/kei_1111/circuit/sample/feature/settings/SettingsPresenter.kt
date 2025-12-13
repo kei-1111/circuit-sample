@@ -17,7 +17,8 @@ import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory
 import dev.zacsweers.metro.AssistedInject
 import io.github.kei_1111.circuit.sample.core.common.CommonParcelize
-import io.github.kei_1111.circuit.sample.core.data.UserPreferencesRepository
+import io.github.kei_1111.circuit.sample.core.domain.GetThemeUseCase
+import io.github.kei_1111.circuit.sample.core.domain.SetThemeUseCase
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import io.github.kei_1111.circuit.sample.di.AppScope
 import kotlinx.coroutines.launch
@@ -45,7 +46,8 @@ sealed interface SettingsEvent : CircuitUiEvent {
 
 class SettingsPresenter @AssistedInject constructor(
     @Assisted private val navigator: Navigator,
-    private val userPreferencesRepository: UserPreferencesRepository,
+    private val getThemeUseCase: GetThemeUseCase,
+    private val setThemeUseCase: SetThemeUseCase,
 ) : Presenter<SettingsState> {
 
     @CircuitInject(SettingsScreen::class, AppScope::class)
@@ -58,7 +60,7 @@ class SettingsPresenter @AssistedInject constructor(
     override fun present(): SettingsState {
         val scope = rememberCoroutineScope()
         var sideEffect by remember { mutableStateOf<SettingsSideEffect?>(null) }
-        val savedTheme by userPreferencesRepository.theme.collectAsState(initial = UserPreferences.Theme.SYSTEM)
+        val savedTheme by getThemeUseCase().collectAsState(initial = UserPreferences.Theme.SYSTEM)
         var editingTheme by remember(savedTheme) { mutableStateOf(savedTheme) }
 
         return SettingsState(
@@ -75,7 +77,7 @@ class SettingsPresenter @AssistedInject constructor(
                     }
                     SettingsEvent.SaveSettings -> {
                         scope.launch {
-                            userPreferencesRepository.setTheme(editingTheme)
+                            setThemeUseCase(editingTheme)
                             sideEffect = SettingsSideEffect.ShowSnackbar("設定を保存しました")
                         }
                     }
