@@ -1,4 +1,4 @@
-package io.github.kei_1111.circuit.sample.feature.home
+package io.github.kei_1111.circuit.sample.feature.main.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -23,7 +23,7 @@ import circuit_sample.composeapp.generated.resources.ic_add
 import circuit_sample.composeapp.generated.resources.ic_remove
 import com.slack.circuit.codegen.annotations.CircuitInject
 import io.github.kei_1111.circuit.sample.di.AppScope
-import io.github.kei_1111.circuit.sample.feature.home.component.HomeTopAppBar
+import io.github.kei_1111.circuit.sample.feature.main.home.component.HomeTopAppBar
 import org.jetbrains.compose.resources.painterResource
 
 @CircuitInject(HomeScreen::class, AppScope::class)
