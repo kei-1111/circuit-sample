@@ -32,3 +32,4 @@ dependencyResolutionManagement {
 include(":composeApp")
 include(":core:common")
 include(":core:local")
+include(":core:model")
