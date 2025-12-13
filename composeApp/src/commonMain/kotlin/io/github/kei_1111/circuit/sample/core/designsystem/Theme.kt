@@ -9,12 +9,12 @@ import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 
 @Composable
 fun CircuitSampleTheme(
-    seedColor: Color = UserPreferences.SeedColor.Default.color,
+    seedColor: UserPreferences.SeedColor = UserPreferences.SeedColor.Default,
     theme: UserPreferences.Theme = UserPreferences.Theme.SYSTEM,
     content: @Composable () -> Unit
 ) {
     val colorScheme = rememberDynamicColorScheme(
-        seedColor = seedColor,
+        seedColor = seedColor.color,
         isDark = when (theme) {
             UserPreferences.Theme.SYSTEM -> isSystemInDarkTheme()
             UserPreferences.Theme.LIGHT -> false

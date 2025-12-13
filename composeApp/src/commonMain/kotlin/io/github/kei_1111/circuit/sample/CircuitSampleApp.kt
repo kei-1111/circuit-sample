@@ -30,7 +30,7 @@ class CircuitSampleApp(
         val seedColor by getSeedColorUseCase().collectAsState(UserPreferences.SeedColor.Default)
 
         CircuitSampleTheme(
-            seedColor = seedColor.color,
+            seedColor = seedColor,
             theme = theme
         ) {
             CircuitCompositionLocals(circuit) {

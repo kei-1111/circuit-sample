@@ -53,7 +53,7 @@ fun Settings(
     }
 
     CircuitSampleTheme(
-        seedColor = state.seedColor.color,
+        seedColor = state.seedColor,
         theme = state.theme
     ) {
         if (state.showColorPicker) {
