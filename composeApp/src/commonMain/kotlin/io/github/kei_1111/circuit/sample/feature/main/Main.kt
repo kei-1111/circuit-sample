@@ -18,6 +18,7 @@ import com.slack.circuit.foundation.rememberCircuitNavigator
 import com.slack.circuit.runtime.Navigator
 import io.github.kei_1111.circuit.sample.di.AppScope
 import io.github.kei_1111.circuit.sample.feature.main.home.HomeScreen
+import kotlinx.coroutines.NonCancellable.start
 import org.jetbrains.compose.resources.painterResource
 
 @CircuitInject(MainScreen::class, AppScope::class)
@@ -28,9 +29,6 @@ fun Main(
 ) {
     val currentScreen = state.navItems[state.selectedIndex].screen
     val backStack = rememberSaveableBackStack(currentScreen)
-    val navigator = rememberCircuitNavigator(backStack) { navEvent ->
-        state.eventSink(MainEvent.ChildNav(navEvent))
-    }
 
     LaunchedEffect(state.selectedIndex) {
         val targetScreen = state.navItems[state.selectedIndex].screen
@@ -52,7 +50,8 @@ fun Main(
     ) { innerPadding ->
         CircuitContent(
             screen = currentScreen,
-            modifier = Modifier.padding(innerPadding),
+            modifier = Modifier
+                .padding(bottom = innerPadding.calculateBottomPadding()),
             onNavEvent = { navEvent -> state.eventSink(MainEvent.ChildNav(navEvent)) }
         )
     }
