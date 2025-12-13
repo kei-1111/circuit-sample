@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.Preview
 import com.slack.circuit.codegen.annotations.CircuitInject
+import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.di.AppScope
 import io.github.kei_1111.circuit.sample.feature.main.favorite.component.FavoriteTopAppBar
 
@@ -36,9 +37,11 @@ fun Favorite(
 @Composable
 @Preview
 private fun FavoritePreview() {
-    Favorite(
-        state = FavoriteState(
-            eventSink = {}
+    CircuitSampleTheme {
+        Favorite(
+            state = FavoriteState(
+                eventSink = {}
+            )
         )
-    )
+    }
 }

@@ -12,6 +12,8 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
+import androidx.compose.material3.SheetValue
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -22,9 +24,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
+import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -62,6 +66,29 @@ fun ColorPickerBottomSheet(
                 controller = controller,
                 initialColor = initialColor,
                 onColorChanged = { onChangeColor(it.color) },
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+@Preview
+private fun ColorPickerBottomSheetPreview() {
+    val sheetState = SheetState(
+        skipPartiallyExpanded = true,
+        positionalThreshold = { 0f },
+        velocityThreshold = { 0f },
+        initialValue = SheetValue.Expanded,
+    )
+
+    CircuitSampleTheme {
+        Surface {
+            ColorPickerBottomSheet(
+                initialColor = Color.Blue,
+                onDismiss = {},
+                onChangeColor = {},
+                sheetState = sheetState
             )
         }
     }

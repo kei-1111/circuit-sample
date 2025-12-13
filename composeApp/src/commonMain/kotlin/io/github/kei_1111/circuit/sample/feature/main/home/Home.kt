@@ -25,6 +25,7 @@ import circuit_sample.composeapp.generated.resources.Res
 import circuit_sample.composeapp.generated.resources.ic_add
 import circuit_sample.composeapp.generated.resources.ic_remove
 import com.slack.circuit.codegen.annotations.CircuitInject
+import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.di.AppScope
 import io.github.kei_1111.circuit.sample.feature.main.home.component.HomeTopAppBar
 import org.jetbrains.compose.resources.painterResource
@@ -94,10 +95,12 @@ fun Home(
 @Composable
 @Preview
 private fun HomePreview() {
-    Home(
-        state = HomeState(
-            count = 10,
-            eventSink = {}
+    CircuitSampleTheme {
+        Home(
+            state = HomeState(
+                count = 10,
+                eventSink = {}
+            )
         )
-    )
+    }
 }
