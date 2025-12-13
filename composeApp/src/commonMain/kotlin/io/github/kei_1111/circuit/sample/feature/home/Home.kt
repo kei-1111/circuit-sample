@@ -21,9 +21,12 @@ import androidx.compose.ui.unit.dp
 import circuit_sample.composeapp.generated.resources.Res
 import circuit_sample.composeapp.generated.resources.ic_add
 import circuit_sample.composeapp.generated.resources.ic_remove
+import com.slack.circuit.codegen.annotations.CircuitInject
+import io.github.kei_1111.circuit.sample.di.AppScope
 import io.github.kei_1111.circuit.sample.feature.home.component.HomeTopAppBar
 import org.jetbrains.compose.resources.painterResource
 
+@CircuitInject(HomeScreen::class, AppScope::class)
 @Composable
 fun Home(
     state: HomeState,
