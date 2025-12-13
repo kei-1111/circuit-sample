@@ -20,7 +20,7 @@ fun <T : UserPreferences> SettingsSection(
     title: String,
     items: List<T>,
     selectedItem: T,
-    onItemClick: (T) -> Unit,
+    onClickItem: (T) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -41,7 +41,7 @@ fun <T : UserPreferences> SettingsSection(
                     SettingItem(
                         userPreferences = item,
                         selected = item == selectedItem,
-                        onClick = { onItemClick(item) }
+                        onClick = { onClickItem(item) }
                     )
                     if (index != items.lastIndex) {
                         HorizontalDivider(modifier = Modifier.padding(start = 40.dp))
@@ -61,7 +61,7 @@ private fun SettingsSectionPreview() {
                 title = "アプリ テーマ",
                 items = UserPreferences.Theme.entries,
                 selectedItem = UserPreferences.Theme.SYSTEM,
-                onItemClick = {}
+                onClickItem = {}
             )
         }
     }

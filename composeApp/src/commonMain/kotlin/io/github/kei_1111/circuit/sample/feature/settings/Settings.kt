@@ -85,7 +85,7 @@ fun Settings(
                     title = "アプリ テーマ",
                     items = UserPreferences.Theme.entries,
                     selectedItem = state.theme,
-                    onItemClick = { state.eventSink(SettingsEvent.UpdateTheme(it)) }
+                    onClickItem = { state.eventSink(SettingsEvent.UpdateTheme(it)) }
                 )
                 SettingsSection(
                     title = "アプリ カラー",
@@ -95,7 +95,7 @@ fun Settings(
                             ?: UserPreferences.SeedColor.Custom(Color(-6259457))
                     ),
                     selectedItem = state.seedColor,
-                    onItemClick = { seedColor ->
+                    onClickItem = { seedColor ->
                         when (seedColor) {
                             is UserPreferences.SeedColor.Default -> {
                                 state.eventSink(SettingsEvent.UpdateSeedColor(seedColor))
