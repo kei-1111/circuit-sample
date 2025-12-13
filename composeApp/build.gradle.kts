@@ -58,6 +58,7 @@ kotlin {
                 implementation(libs.composeUiToolingPreview)
                 implementation(libs.kotlinxSerializationCore)
                 implementation(libs.materialKolor)
+                implementation(libs.colorPickerCompose)
             }
         }
         androidMain.dependencies {
