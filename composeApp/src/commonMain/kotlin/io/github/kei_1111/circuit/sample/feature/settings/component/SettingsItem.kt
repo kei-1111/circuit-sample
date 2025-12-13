@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
@@ -116,12 +117,24 @@ private data class SettingsItemPreviewParameter(
 private class SettingsItemPPP : CollectionPreviewParameterProvider<SettingsItemPreviewParameter>(
     collection = listOf(
         SettingsItemPreviewParameter(
-            userPreferences = UserPreferences.Theme.DARK,
+            userPreferences = UserPreferences.Theme.SYSTEM,
             selected = true,
         ),
         SettingsItemPreviewParameter(
             userPreferences = UserPreferences.Theme.LIGHT,
             selected = false,
-        )
+        ),
+        SettingsItemPreviewParameter(
+            userPreferences = UserPreferences.Theme.DARK,
+            selected = false,
+        ),
+        SettingsItemPreviewParameter(
+            userPreferences = UserPreferences.SeedColor.Default,
+            selected = true,
+        ),
+        SettingsItemPreviewParameter(
+            userPreferences = UserPreferences.SeedColor.Custom(Color.Red),
+            selected = false,
+        ),
     )
 )
