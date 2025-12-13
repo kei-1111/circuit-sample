@@ -14,7 +14,7 @@ import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.domain.GetSeedColorUseCase
 import io.github.kei_1111.circuit.sample.core.domain.GetThemeUseCase
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
-import io.github.kei_1111.circuit.sample.feature.home.HomeScreen
+import io.github.kei_1111.circuit.sample.feature.main.MainScreen
 
 @Inject
 class CircuitSampleApp(
@@ -24,7 +24,7 @@ class CircuitSampleApp(
 ) {
     @Composable
     operator fun invoke() {
-        val backStack = rememberSaveableBackStack(HomeScreen)
+        val backStack = rememberSaveableBackStack(MainScreen)
         val navigator = rememberCircuitNavigator(backStack) {}
         val theme by getThemeUseCase().collectAsState(UserPreferences.Theme.SYSTEM)
         val seedColor by getSeedColorUseCase().collectAsState(UserPreferences.SeedColor.Default)

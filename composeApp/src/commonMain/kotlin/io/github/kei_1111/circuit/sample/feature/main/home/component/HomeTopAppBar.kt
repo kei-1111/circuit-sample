@@ -1,4 +1,4 @@
-package io.github.kei_1111.circuit.sample.feature.home.component
+package io.github.kei_1111.circuit.sample.feature.main.home.component
 
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -45,4 +45,3 @@ private fun HomeTopAppBarPreview() {
         onClickSettings = {}
     )
 }
-

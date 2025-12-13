@@ -1,4 +1,4 @@
-package io.github.kei_1111.circuit.sample.feature.home
+package io.github.kei_1111.circuit.sample.feature.main.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
