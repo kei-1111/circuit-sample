@@ -12,7 +12,8 @@ import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.screen.Screen
 import dev.zacsweers.metro.Assisted
-import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.AssistedFactory
+import dev.zacsweers.metro.AssistedInject
 import io.github.kei_1111.circuit.sample.core.common.CommonParcelize
 import io.github.kei_1111.circuit.sample.di.AppScope
 import io.github.kei_1111.circuit.sample.feature.settings.SettingsScreen
@@ -31,10 +32,16 @@ sealed interface HomeEvent : CircuitUiEvent {
     data object NavigateSettings : HomeEvent
 }
 
-@CircuitInject(HomeScreen::class, AppScope::class)
-class HomePresenter @Inject constructor(
+class HomePresenter @AssistedInject constructor(
     @Assisted private val navigator: Navigator,
 ) : Presenter<HomeState> {
+
+    @CircuitInject(HomeScreen::class, AppScope::class)
+    @AssistedFactory
+    fun interface Factory {
+        fun create(navigator: Navigator): HomePresenter
+    }
+
     @Composable
     override fun present(): HomeState {
         var count by rememberRetained { mutableStateOf(0) }

@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -38,23 +39,29 @@ kotlin {
     }
     
     sourceSets {
+        commonMain {
+            kotlin {
+                srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+            }
+
+            dependencies {
+                implementation(libs.androidxDataStorePreferences)
+                implementation(libs.androidxLifecycleViewModelCompose)
+                implementation(libs.androidxLifecycleRuntimeCompose)
+                implementation(libs.circuitCodegenAnnotations)
+                implementation(libs.circuitFoundation)
+                implementation(libs.composeComponentsResources)
+                implementation(libs.composeFoundation)
+                implementation(libs.composeMaterial3)
+                implementation(libs.composeRuntime)
+                implementation(libs.composeUi)
+                implementation(libs.composeUiToolingPreview)
+                implementation(libs.kotlinxSerializationCore)
+                implementation(libs.materialKolor)
+            }
+        }
         androidMain.dependencies {
             implementation(libs.androidxActivityCompose)
-        }
-        commonMain.dependencies {
-            implementation(libs.androidxDataStorePreferences)
-            implementation(libs.androidxLifecycleViewModelCompose)
-            implementation(libs.androidxLifecycleRuntimeCompose)
-            implementation(libs.circuitCodegenAnnotations)
-            implementation(libs.circuitFoundation)
-            implementation(libs.composeComponentsResources)
-            implementation(libs.composeFoundation)
-            implementation(libs.composeMaterial3)
-            implementation(libs.composeRuntime)
-            implementation(libs.composeUi)
-            implementation(libs.composeUiToolingPreview)
-            implementation(libs.kotlinxSerializationCore)
-            implementation(libs.materialKolor)
         }
     }
 }
@@ -63,10 +70,11 @@ dependencies {
     add("kspCommonMainMetadata", libs.circuitCodegen)
 }
 
-tasks.withType<KotlinCompile>().configureEach {
-    if (name != "kspCommonMainKotlinMetadata") {
-        dependsOn("kspCommonMainKotlinMetadata")
+tasks.withType<KotlinCompilationTask<*>>().configureEach {
+    if (this is AbstractKotlinCompile<*>) {
+        incremental = false
     }
+    dependsOn("kspCommonMainKotlinMetadata")
 }
 
 android {
