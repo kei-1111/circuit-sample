@@ -19,7 +19,6 @@ import io.github.kei_1111.circuit.sample.core.local.createDataStore
 @DependencyGraph(AppScope::class)
 interface AppGraph {
     val app: CircuitSampleApp
-    val userPreferencesRepository: UserPreferencesRepository
 
     @DependencyGraph.Factory
     fun interface Factory {
