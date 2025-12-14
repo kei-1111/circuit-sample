@@ -1,7 +1,5 @@
 plugins {
-    alias(libs.plugins.circuitSampleKmpLibrary)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.circuitSampleKmpLibraryCompose)
 }
 
 kotlin {
@@ -12,9 +10,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.model)
-            implementation(libs.composeFoundation)
-            implementation(libs.composeMaterial3)
-            implementation(libs.composeRuntime)
             implementation(libs.materialKolor)
         }
     }

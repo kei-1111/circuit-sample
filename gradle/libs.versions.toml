@@ -60,4 +60,5 @@ metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
 
 # Convention Plugins
 circuitSampleKmpLibrary = { id = "kmp.library" }
+circuitSampleKmpLibraryCompose = { id = "kmp.library.compose" }
 circuitSampleKmpFeature = { id = "kmp.feature" }
