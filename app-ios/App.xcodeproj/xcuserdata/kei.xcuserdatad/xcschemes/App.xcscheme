@@ -9,8 +9,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A87DAF0B987D585F4D043758"
                BuildableName = "CircuitSample.app"
-               BlueprintName = "iosApp"
-               ReferencedContainer = "container:iosApp.xcodeproj">
+               BlueprintName = "App"
+               ReferencedContainer = "container:App.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -24,8 +24,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A87DAF0B987D585F4D043758"
             BuildableName = "CircuitSample.app"
-            BlueprintName = "iosApp"
-            ReferencedContainer = "container:iosApp.xcodeproj">
+            BlueprintName = "App"
+            ReferencedContainer = "container:App.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>

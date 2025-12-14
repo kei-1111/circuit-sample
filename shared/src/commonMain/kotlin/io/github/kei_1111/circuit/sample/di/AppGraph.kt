@@ -1,49 +1,15 @@
 package io.github.kei_1111.circuit.sample.di
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import com.slack.circuit.foundation.Circuit
-import com.slack.circuit.runtime.presenter.Presenter
-import com.slack.circuit.runtime.ui.Ui
-import dev.zacsweers.metro.DependencyGraph
-import dev.zacsweers.metro.Includes
-import dev.zacsweers.metro.Provides
-import dev.zacsweers.metro.SingleIn
 import io.github.kei_1111.circuit.sample.CircuitSampleApp
-import io.github.kei_1111.circuit.sample.core.common.AppScope
-import io.github.kei_1111.circuit.sample.core.data.UserPreferencesRepository
-import io.github.kei_1111.circuit.sample.core.data.UserPreferencesRepositoryImpl
-import io.github.kei_1111.circuit.sample.core.local.DataStorePathProducer
-import io.github.kei_1111.circuit.sample.core.local.createDataStore
 
-@SingleIn(AppScope::class)
-@DependencyGraph(AppScope::class)
+/**
+ * 共通のAppGraphインターフェース。
+ * プラットフォーム固有の実装（AndroidAppGraph, IosAppGraph）で@DependencyGraphを定義する。
+ *
+ * iOS向けは compiler plugin が metadata only target をサポートしないため、
+ * 手動で依存関係を定義する必要がある。
+ * 参照: https://github.com/ZacSweers/metro/issues/460
+ */
 interface AppGraph {
     val app: CircuitSampleApp
-
-    @DependencyGraph.Factory
-    fun interface Factory {
-        fun create(@Includes platformGraph: PlatformGraph): AppGraph
-    }
-
-    @SingleIn(AppScope::class)
-    @Provides
-    fun provideCircuit(
-        presenterFactories: Set<Presenter.Factory>,
-        uiFactories: Set<Ui.Factory>
-    ): Circuit = Circuit.Builder()
-        .addPresenterFactories(presenterFactories)
-        .addUiFactories(uiFactories)
-        .build()
-
-    @SingleIn(AppScope::class)
-    @Provides
-    fun provideDataStore(dataStorePathProducer: DataStorePathProducer): DataStore<Preferences> =
-        createDataStore(dataStorePathProducer)
-
-    @SingleIn(AppScope::class)
-    @Provides
-    fun provideUserPreferencesRepository(
-        dataStore: DataStore<Preferences>
-    ): UserPreferencesRepository = UserPreferencesRepositoryImpl(dataStore)
 }
