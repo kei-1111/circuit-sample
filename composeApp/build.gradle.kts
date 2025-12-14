@@ -3,10 +3,10 @@ import org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinMultiplatformLibrary)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinParcelize)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ksp)
@@ -22,12 +22,18 @@ kotlin {
         freeCompilerArgs.addAll("-P", "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation=io.github.kei_1111.circuit.sample.core.common.CommonParcelize")
     }
 
-    androidTarget {
+    androidLibrary {
+        androidResources.enable = true
+
+        namespace = "io.github.kei_1111.circuit.sample.shared"
+        compileSdk = libs.versions.androidCompileSdk.get().toInt()
+        minSdk = libs.versions.androidMinSdk.get().toInt()
+
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_21)
         }
     }
-    
+
     listOf(
         iosArm64(),
         iosSimulatorArm64()
@@ -37,7 +43,7 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         commonMain {
             kotlin {
@@ -62,7 +68,7 @@ kotlin {
             }
         }
         androidMain.dependencies {
-            implementation(libs.androidxActivityCompose)
+            implementation(libs.composeUiTooling)
         }
     }
 }
@@ -76,31 +82,4 @@ tasks.withType<KotlinCompilationTask<*>>().configureEach {
         incremental = false
     }
     dependsOn("kspCommonMainKotlinMetadata")
-}
-
-android {
-    namespace = "io.github.kei_1111.circuit.sample"
-    compileSdk = libs.versions.androidCompileSdk.get().toInt()
-
-    defaultConfig {
-        applicationId = "io.github.kei_1111.circuit.sample"
-        minSdk = libs.versions.androidMinSdk.get().toInt()
-        targetSdk = libs.versions.androidTargetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
-    }
-}
-
-dependencies {
-    debugImplementation(libs.composeUiTooling)
 }
