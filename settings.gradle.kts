@@ -2,6 +2,7 @@ rootProject.name = "circuit-sample"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             mavenContent {
@@ -28,4 +29,14 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
+include(":shared")
+include(":core:common")
+include(":core:local")
+include(":core:model")
+include(":core:navigation")
+include(":core:data")
+include(":core:domain")
+include(":core:designsystem")
+include(":feature:main")
+include(":feature:settings")
+include(":app-android")
