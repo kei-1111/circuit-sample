@@ -1,8 +1,6 @@
 package io.github.kei_1111.circuit.sample.di
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.ui.Ui
@@ -10,11 +8,12 @@ import dev.zacsweers.metro.DependencyGraph
 import dev.zacsweers.metro.Provides
 import dev.zacsweers.metro.SingleIn
 import io.github.kei_1111.circuit.sample.core.common.AppScope
-import io.github.kei_1111.circuit.sample.core.data.UserPreferencesRepository
-import io.github.kei_1111.circuit.sample.core.data.UserPreferencesRepositoryImpl
+import io.github.kei_1111.circuit.sample.core.data.di.DataBindings
+import io.github.kei_1111.circuit.sample.core.data.di.DataScope
 import io.github.kei_1111.circuit.sample.core.local.DataStorePathProducer
-import io.github.kei_1111.circuit.sample.core.local.createDataStore
 import io.github.kei_1111.circuit.sample.core.local.createDataStorePathProducer
+import io.github.kei_1111.circuit.sample.core.local.di.LocalBindings
+import io.github.kei_1111.circuit.sample.core.local.di.LocalScope
 import dev.zacsweers.metro.createGraphFactory
 
 /**
@@ -22,7 +21,11 @@ import dev.zacsweers.metro.createGraphFactory
  * @ContributesIntoSet による Factory の自動集約が機能する。
  */
 @SingleIn(AppScope::class)
-@DependencyGraph(AppScope::class)
+@DependencyGraph(
+    scope = AppScope::class,
+    additionalScopes = [DataScope::class, LocalScope::class],
+    bindingContainers = [DataBindings::class, LocalBindings::class]
+)
 interface AndroidAppGraph : AppGraph {
 
     @DependencyGraph.Factory
@@ -43,17 +46,6 @@ interface AndroidAppGraph : AppGraph {
     @Provides
     fun provideDataStorePathProducer(context: Context): DataStorePathProducer =
         createDataStorePathProducer(context)
-
-    @SingleIn(AppScope::class)
-    @Provides
-    fun provideDataStore(dataStorePathProducer: DataStorePathProducer): DataStore<Preferences> =
-        createDataStore(dataStorePathProducer)
-
-    @SingleIn(AppScope::class)
-    @Provides
-    fun provideUserPreferencesRepository(
-        dataStore: DataStore<Preferences>
-    ): UserPreferencesRepository = UserPreferencesRepositoryImpl(dataStore)
 }
 
 fun createAndroidAppGraph(context: Context): AndroidAppGraph = createGraphFactory<AndroidAppGraph.Factory>().create(context)

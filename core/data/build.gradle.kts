@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.circuitSampleKmpLibrary)
+    alias(libs.plugins.metro)
 }
 
 kotlin {

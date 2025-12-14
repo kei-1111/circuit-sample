@@ -1,7 +1,5 @@
 package io.github.kei_1111.circuit.sample.di
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.runtime.CircuitContext
 import com.slack.circuit.runtime.Navigator
@@ -14,11 +12,12 @@ import dev.zacsweers.metro.Provides
 import dev.zacsweers.metro.SingleIn
 import dev.zacsweers.metro.createGraphFactory
 import io.github.kei_1111.circuit.sample.core.common.AppScope
-import io.github.kei_1111.circuit.sample.core.data.UserPreferencesRepository
-import io.github.kei_1111.circuit.sample.core.data.UserPreferencesRepositoryImpl
+import io.github.kei_1111.circuit.sample.core.data.di.DataBindings
+import io.github.kei_1111.circuit.sample.core.data.di.DataScope
 import io.github.kei_1111.circuit.sample.core.local.DataStorePathProducer
-import io.github.kei_1111.circuit.sample.core.local.createDataStore
 import io.github.kei_1111.circuit.sample.core.local.createDataStorePathProducer
+import io.github.kei_1111.circuit.sample.core.local.di.LocalBindings
+import io.github.kei_1111.circuit.sample.core.local.di.LocalScope
 import io.github.kei_1111.circuit.sample.core.navigation.FavoriteScreen
 import io.github.kei_1111.circuit.sample.core.navigation.HomeScreen
 import io.github.kei_1111.circuit.sample.core.navigation.MainScreen
@@ -45,7 +44,11 @@ import io.github.kei_1111.circuit.sample.feature.settings.SettingsState
  * 参照: https://github.com/ZacSweers/metro/issues/460
  */
 @SingleIn(AppScope::class)
-@DependencyGraph(AppScope::class)
+@DependencyGraph(
+    scope = AppScope::class,
+    additionalScopes = [DataScope::class, LocalScope::class],
+    bindingContainers = [DataBindings::class, LocalBindings::class]
+)
 interface IosAppGraph : AppGraph {
 
     @DependencyGraph.Factory
@@ -56,17 +59,6 @@ interface IosAppGraph : AppGraph {
     @Provides
     fun provideDataStorePathProducer(): DataStorePathProducer =
         createDataStorePathProducer()
-
-    @SingleIn(AppScope::class)
-    @Provides
-    fun provideDataStore(dataStorePathProducer: DataStorePathProducer): DataStore<Preferences> =
-        createDataStore(dataStorePathProducer)
-
-    @SingleIn(AppScope::class)
-    @Provides
-    fun provideUserPreferencesRepository(
-        dataStore: DataStore<Preferences>
-    ): UserPreferencesRepository = UserPreferencesRepositoryImpl(dataStore)
 
     // ============================================
     // Presenter.Factory - 手動で提供
