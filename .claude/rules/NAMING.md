@@ -17,7 +17,9 @@ Follow these naming conventions when creating new files, classes, modules, or re
 | Composable (Screen) | `<Feature>` | `Home`, `Settings` |
 | Composable (Component) | `<Feature><ComponentType>` | `HomeTopAppBar`, `SettingsSection` |
 | Theme Function | `<ProjectName>Theme` | `CircuitSampleTheme` |
-| DI Scope | `<Level>Scope` | `AppScope` |
+| DI Scope (App) | `AppScope` | `AppScope` |
+| DI Scope (Module) | `<Module>Scope` | `DataScope`, `LocalScope` |
+| DI Bindings | `<Module>Bindings` | `DataBindings`, `LocalBindings` |
 | DI Graph | `<Platform>AppGraph` | `AndroidAppGraph`, `IosAppGraph` |
 | Provider Method | `provide<Component>` | `provideCircuit`, `provideUserPreferencesRepository` |
 | Callback | `on<Action><Target>` | `onClickSettings`, `onDismiss`, `onChangeColor` |

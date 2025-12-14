@@ -49,6 +49,8 @@ Compose Multiplatform + Circuit (Slack) によるサンプルアプリ。Clean A
 | DI設定 (共通) | `shared/src/commonMain/.../di/AppGraph.kt` |
 | DI設定 (Android) | `shared/src/androidMain/.../di/AndroidAppGraph.kt` |
 | DI設定 (iOS) | `shared/src/iosMain/.../di/IosAppGraph.kt` |
+| DI Bindings (data) | `core/data/src/commonMain/.../di/DataBindings.kt` |
+| DI Bindings (local) | `core/local/src/commonMain/.../di/LocalBindings.kt` |
 | バージョン情報 | `gradle/libs.versions.toml` |
 | Convention Plugins | `build-logic/convention/src/main/kotlin/*.gradle.kts` |
 
