@@ -2,30 +2,30 @@
 paths: feature/**/*.kt
 ---
 
-# UI Implementation Guidelines
+# UI実装ガイドライン
 
-## Component Responsibility Separation
+## コンポーネントの責務分離
 
-### Basic Principle
+### 基本原則
 
-Components should focus on View responsibilities only. They should NOT have knowledge of business logic or Event/State details.
+コンポーネントはViewの責務のみに集中すべき。ビジネスロジックやEvent/Stateの詳細を知るべきではない。
 
-### Event Knowledge Boundary
+### Eventの知識境界
 
-| Layer | Event Knowledge | Callback Pattern |
-|-------|-----------------|------------------|
-| `*.kt` (Circuit UI) | Yes | `state.eventSink(Event)` |
-| `component/*.kt` | No | UI callbacks (e.g., `onClickSettings`) |
+| レイヤー | Eventの知識 | コールバックパターン |
+|---------|-------------|---------------------|
+| `*.kt` (Circuit UI) | あり | `state.eventSink(Event)` |
+| `component/*.kt` | なし | UIコールバック (例: `onClickSettings`) |
 
-### Structure Example
-
-```
-Home.kt                    <- Receives State with eventSink, maps callbacks to Events
-└── HomeTopAppBar.kt       <- onClickSettings: () -> Unit (no Event knowledge)
-```
+### 構造例
 
 ```
-Settings.kt                <- Receives State with eventSink
+Home.kt                    <- eventSink付きStateを受け取り、コールバックをEventにマッピング
+└── HomeTopAppBar.kt       <- onClickSettings: () -> Unit (Eventの知識なし)
+```
+
+```
+Settings.kt                <- eventSink付きStateを受け取る
 ├── SettingsTopAppBar.kt   <- onClickBack: () -> Unit
 ├── SettingsSection.kt     <- onClickItem: (T) -> Unit
 └── ColorPickerBottomSheet.kt <- onDismiss, onChangeColor
@@ -33,14 +33,14 @@ Settings.kt                <- Receives State with eventSink
 
 ---
 
-## Implementation Patterns
+## 実装パターン
 
 ### Screen UI (Circuit Inject)
 
-Screen-level composables receive `State` and use `eventSink` to dispatch events.
+Screen レベルのComposableは`State`を受け取り、`eventSink`でイベントをディスパッチする。
 
 ```kotlin
-// Home.kt - Has Event knowledge
+// Home.kt - Eventの知識あり
 @CircuitInject(HomeScreen::class, AppScope::class)
 @Composable
 fun Home(
@@ -50,7 +50,7 @@ fun Home(
     Scaffold(
         topBar = {
             HomeTopAppBar(
-                // Map UI callback to Event
+                // UIコールバックをEventにマッピング
                 onClickSettings = { state.eventSink(HomeEvent.NavigateSettings) }
             )
         }
@@ -62,15 +62,15 @@ fun Home(
 }
 ```
 
-### Components (No Event Knowledge)
+### Components (Eventの知識なし)
 
-Components are pure UI elements that receive simple callbacks.
+コンポーネントはシンプルなコールバックを受け取る純粋なUI要素。
 
 ```kotlin
-// HomeTopAppBar.kt - No Event knowledge (pure UI component)
+// HomeTopAppBar.kt - Eventの知識なし（純粋なUIコンポーネント）
 @Composable
 fun HomeTopAppBar(
-    onClickSettings: () -> Unit,  // Simple callback, no Event type
+    onClickSettings: () -> Unit,  // シンプルなコールバック、Event型なし
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
@@ -84,16 +84,16 @@ fun HomeTopAppBar(
 }
 ```
 
-### Generic Components with Type Parameters
+### 型パラメータ付き汎用コンポーネント
 
 ```kotlin
-// SettingsSection.kt - Reusable, no Event knowledge
+// SettingsSection.kt - 再利用可能、Eventの知識なし
 @Composable
 fun <T : UserPreferences> SettingsSection(
     title: String,
     items: List<T>,
     selectedItem: T,
-    onClickItem: (T) -> Unit,  // Generic callback with item type
+    onClickItem: (T) -> Unit,  // アイテム型付き汎用コールバック
     modifier: Modifier = Modifier,
 ) {
     Column {
@@ -101,7 +101,7 @@ fun <T : UserPreferences> SettingsSection(
             SettingItem(
                 userPreferences = item,
                 selected = item == selectedItem,
-                onClick = { onClickItem(item) }  // Delegate to parent
+                onClick = { onClickItem(item) }  // 親に委譲
             )
         }
     }
@@ -110,43 +110,43 @@ fun <T : UserPreferences> SettingsSection(
 
 ---
 
-## Benefits
+## 利点
 
-1. **Testability**: UI components can be tested with simple callbacks
-2. **Reusability**: Components without Event dependency can be reused across features
-3. **Separation of Concerns**: UI focuses on View, business logic handled in Screen/Presenter
+1. **テスト容易性**: UIコンポーネントはシンプルなコールバックでテスト可能
+2. **再利用性**: Event依存のないコンポーネントは機能間で再利用可能
+3. **関心の分離**: UIはViewに集中、ビジネスロジックはScreen/Presenterで処理
 
 ---
 
-## File Organization
+## ファイル構成
 
-### Screen UI File (`Feature.kt`)
+### Screen UIファイル (`Feature.kt`)
 
-- Annotated with `@CircuitInject`
-- Receives `State` parameter
-- Maps component callbacks to `eventSink(Event)`
-- Contains `Scaffold`, layout structure
+- `@CircuitInject`でアノテーション
+- `State`パラメータを受け取る
+- コンポーネントのコールバックを`eventSink(Event)`にマッピング
+- `Scaffold`、レイアウト構造を含む
 
-### Component Files (`component/*.kt`)
+### コンポーネントファイル (`component/*.kt`)
 
-- Located in `component/` subdirectory
-- Receive simple callback parameters
-- No knowledge of `Event` or `State` types
-- Focus on single UI responsibility
+- `component/`サブディレクトリに配置
+- シンプルなコールバックパラメータを受け取る
+- `Event`や`State`型の知識なし
+- 単一のUI責務に集中
 
 ```
 feature/home/
 ├── Home.kt                  # Screen UI (@CircuitInject)
-├── HomePresenter.kt         # Screen + State + Event + Presenter
+├── HomePresenter.kt         # State + Event + Presenter
 └── component/
-    └── HomeTopAppBar.kt     # Pure UI component
+    └── HomeTopAppBar.kt     # 純粋なUIコンポーネント
 ```
 
 ---
 
-## Preview Guidelines
+## プレビューガイドライン
 
-### Screen Preview
+### Screenプレビュー
 
 ```kotlin
 @Composable
@@ -156,14 +156,14 @@ private fun HomePreview() {
         Home(
             state = HomeState(
                 count = 10,
-                eventSink = {}  // Empty lambda for preview
+                eventSink = {}  // プレビュー用の空ラムダ
             )
         )
     }
 }
 ```
 
-### Component Preview
+### コンポーネントプレビュー
 
 ```kotlin
 @Composable
@@ -172,14 +172,14 @@ private fun HomeTopAppBarPreview() {
     CircuitSampleTheme {
         Surface {
             HomeTopAppBar(
-                onClickSettings = {}  // Empty lambda for preview
+                onClickSettings = {}  // プレビュー用の空ラムダ
             )
         }
     }
 }
 ```
 
-### PreviewParameter for Multiple States
+### 複数Stateのプレビュー (PreviewParameter)
 
 ```kotlin
 @Composable
@@ -214,11 +214,11 @@ private class SettingsItemPPP : CollectionPreviewParameterProvider<SettingsItemP
 
 ---
 
-## Common Mistakes
+## よくある間違い
 
-| Wrong | Correct |
-|-------|---------|
-| Component receives `State` | Component receives only needed data |
-| Component calls `eventSink` | Component uses simple callbacks |
-| Component imports `*Event` | Component has no Event knowledge |
-| Preview without Theme wrapper | Preview wrapped with `CircuitSampleTheme` |
+| NG | OK |
+|----|-----|
+| コンポーネントが`State`を受け取る | コンポーネントは必要なデータのみ受け取る |
+| コンポーネントが`eventSink`を呼ぶ | コンポーネントはシンプルなコールバックを使用 |
+| コンポーネントが`*Event`をインポート | コンポーネントはEventの知識を持たない |
+| Themeラッパーなしのプレビュー | `CircuitSampleTheme`でラップしたプレビュー |

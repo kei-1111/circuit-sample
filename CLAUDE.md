@@ -22,6 +22,7 @@ Compose Multiplatform + Circuit (Slack) によるサンプルアプリ。Clean A
 1. **PresenterはUseCaseを経由** - Repositoryを直接使用しない
 2. **UIはステートレス** - Stateを受け取り、eventSinkでイベント通知
 3. **State/Event/Presenterは同一ファイル** - `XxxPresenter.kt`に定義
+4. **Screenは`core/navigation`に集約** - `Screens.kt`に全Screen定義
 
 ### よくある間違い
 
@@ -35,18 +36,21 @@ Compose Multiplatform + Circuit (Slack) によるサンプルアプリ。Clean A
 
 | コマンド | 説明 |
 |---------|------|
-| `./gradlew assembleDebug` | Android APKビルド |
-| `./gradlew compileKotlinIosArm64` | iOS向けビルド |
+| `./gradlew :app-android:assembleDebug` | Android APKビルド |
+| `./gradlew :shared:linkDebugFrameworkIosSimulatorArm64` | iOS Simulator向けビルド |
 
 ### 重要ファイル参照
 
 | 内容 | 参照先 |
 |------|--------|
-| Presenter実装例 | `composeApp/.../feature/settings/SettingsPresenter.kt:54` |
-| UI実装例 | `composeApp/.../feature/settings/Settings.kt:38` |
-| UseCase実装例 | `composeApp/.../core/domain/GetThemeUseCase.kt:8` |
-| DI設定 | `composeApp/.../di/AppGraph.kt` |
+| Presenter実装例 | `feature/settings/src/commonMain/.../SettingsPresenter.kt` |
+| UI実装例 | `feature/settings/src/commonMain/.../Settings.kt` |
+| UseCase実装例 | `core/domain/src/commonMain/.../GetThemeUseCase.kt` |
+| DI設定 (共通) | `shared/src/commonMain/.../di/AppGraph.kt` |
+| DI設定 (Android) | `shared/src/androidMain/.../di/AndroidAppGraph.kt` |
+| DI設定 (iOS) | `shared/src/iosMain/.../di/IosAppGraph.kt` |
 | バージョン情報 | `gradle/libs.versions.toml` |
+| Convention Plugins | `build-logic/convention/src/main/kotlin/*.gradle.kts` |
 
 ### Circuitパターン構成
 
