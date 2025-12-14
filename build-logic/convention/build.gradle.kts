@@ -14,22 +14,11 @@ tasks.withType<KotlinJvmCompile>().configureEach {
 }
 
 dependencies {
-    compileOnly(libs.androidGradle)
-    compileOnly(libs.kotlinGradle)
-    compileOnly(libs.composeGradle)
-    compileOnly(libs.kspGradle)
-    compileOnly(libs.metroGradle)
-}
-
-gradlePlugin {
-    plugins {
-        register("kmpLibrary") {
-            id = libs.plugins.circuitSampleKmpLibrary.get().pluginId
-            implementationClass = "KmpLibraryConventionPlugin"
-        }
-        register("kmpFeature") {
-            id = libs.plugins.circuitSampleKmpFeature.get().pluginId
-            implementationClass = "KmpFeatureConventionPlugin"
-        }
-    }
+    implementation(libs.androidGradle)
+    implementation(libs.androidKmpLibraryGradle)
+    implementation(libs.kotlinGradle)
+    implementation(libs.composeCompilerGradle)
+    implementation(libs.composeGradle)
+    implementation(libs.kspGradle)
+    implementation(libs.metroGradle)
 }
