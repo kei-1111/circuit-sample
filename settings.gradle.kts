@@ -29,7 +29,7 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
+include(":shared")
 include(":core:common")
 include(":core:local")
 include(":core:model")

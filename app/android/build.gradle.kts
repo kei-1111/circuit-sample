@@ -43,6 +43,8 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.composeApp)
+    implementation(projects.shared)
+    implementation(projects.feature.main)
+    implementation(projects.feature.settings)
     implementation(libs.androidxActivityCompose)
 }
