@@ -1,7 +1,5 @@
 plugins {
     alias(libs.plugins.circuitSampleKmpLibrary)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
 }
 
 kotlin {
@@ -11,7 +9,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.composeUi)
+            api(libs.composeUi)
         }
     }
 }
