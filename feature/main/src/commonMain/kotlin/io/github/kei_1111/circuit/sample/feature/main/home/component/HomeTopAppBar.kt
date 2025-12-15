@@ -10,9 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import circuit_sample.feature.main.generated.resources.Res
+import circuit_sample.feature.main.generated.resources.app_name
 import circuit_sample.feature.main.generated.resources.ic_settings
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,7 +26,7 @@ fun HomeTopAppBar(
         modifier = modifier,
         title = {
             Text(
-                text = "Circuit Sample",
+                text = stringResource(Res.string.app_name),
             )
         },
         actions = {

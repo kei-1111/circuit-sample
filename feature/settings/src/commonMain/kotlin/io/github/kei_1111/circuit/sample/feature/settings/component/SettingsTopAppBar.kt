@@ -11,8 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import circuit_sample.feature.settings.generated.resources.Res
 import circuit_sample.feature.settings.generated.resources.ic_back
+import circuit_sample.feature.settings.generated.resources.settings
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,7 +26,7 @@ fun SettingsTopAppBar(
         modifier = modifier,
         title = {
             Text(
-                text = "Settings",
+                text = stringResource(Res.string.settings),
             )
         },
         navigationIcon = {

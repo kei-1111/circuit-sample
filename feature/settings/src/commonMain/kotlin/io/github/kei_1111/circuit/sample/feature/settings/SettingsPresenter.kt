@@ -7,6 +7,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import circuit_sample.feature.settings.generated.resources.Res
+import circuit_sample.feature.settings.generated.resources.settings_saved
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.CircuitUiEvent
 import com.slack.circuit.runtime.CircuitUiState
@@ -23,9 +25,10 @@ import io.github.kei_1111.circuit.sample.core.domain.SetThemeUseCase
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import io.github.kei_1111.circuit.sample.core.navigation.SettingsScreen
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.StringResource
 
 sealed interface SettingsSideEffect {
-    data class ShowSnackbar(val message: String) : SettingsSideEffect
+    data class ShowSnackbar(val messageRes: StringResource) : SettingsSideEffect
 }
 
 data class SettingsState(
@@ -93,7 +96,7 @@ class SettingsPresenter @AssistedInject constructor(
                         scope.launch {
                             setThemeUseCase(editingTheme)
                             setSeedColorUseCase(editingSeedColor)
-                            sideEffect = SettingsSideEffect.ShowSnackbar("設定を保存しました")
+                            sideEffect = SettingsSideEffect.ShowSnackbar(Res.string.settings_saved)
                         }
                     }
                     is SettingsEvent.UpdateTheme -> {

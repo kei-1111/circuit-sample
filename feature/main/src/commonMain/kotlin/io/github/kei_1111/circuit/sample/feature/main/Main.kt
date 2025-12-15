@@ -21,6 +21,7 @@ import io.github.kei_1111.circuit.sample.core.common.AppScope
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.navigation.MainScreen
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @CircuitInject(MainScreen::class, AppScope::class)
 @Composable
@@ -73,10 +74,10 @@ private fun MainBottomNavigationBar(
                 icon = {
                     Icon(
                         painter = painterResource(item.icon),
-                        contentDescription = item.label
+                        contentDescription = stringResource(item.labelRes)
                     )
                 },
-                label = { Text(item.label) }
+                label = { Text(stringResource(item.labelRes)) }
             )
         }
     }
