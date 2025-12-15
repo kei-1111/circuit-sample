@@ -31,6 +31,7 @@ kotlin {
             }
             dependencies {
                 implementation(projects.feature.main)
+                implementation(projects.feature.oss)
                 implementation(projects.feature.settings)
                 implementation(projects.core.common)
                 implementation(projects.core.navigation)
