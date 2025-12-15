@@ -1,4 +1,5 @@
 [versions]
+aboutLibraries = "13.1.0"
 agp = "9.0.0-beta05"
 androidCompileSdk = "36"
 androidMinSdk = "24"
@@ -25,6 +26,8 @@ kspGradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin"
 metroGradle = { module = "dev.zacsweers.metro:dev.zacsweers.metro.gradle.plugin", version.ref = "metro" }
 
 # app dependencies
+aboutLibrariesCore = { module = "com.mikepenz:aboutlibraries-core", version.ref = "aboutLibraries" }
+aboutLibrariesComposeM3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
 androidxDataStorePreferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "androidxDataStore" }
 androidxActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 circuitCodegen = { module = "com.slack.circuit:circuit-codegen", version.ref = "circuit" }
@@ -41,6 +44,7 @@ composeUiToolingPreview = { module = "org.jetbrains.compose.ui:ui-tooling-previe
 materialKolor = { module = "com.materialkolor:material-kolor", version.ref = "materialKolor" }
 
 [plugins]
+aboutLibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "aboutLibraries" }
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
