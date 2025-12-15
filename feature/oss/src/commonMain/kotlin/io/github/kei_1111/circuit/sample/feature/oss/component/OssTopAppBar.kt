@@ -1,5 +1,6 @@
 package io.github.kei_1111.circuit.sample.feature.oss.component
 
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,7 +23,7 @@ fun OssTopAppBar(
     onClickBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    TopAppBar(
+    CenterAlignedTopAppBar(
         modifier = modifier,
         title = {
             Text(text = stringResource(Res.string.oss_licenses))
