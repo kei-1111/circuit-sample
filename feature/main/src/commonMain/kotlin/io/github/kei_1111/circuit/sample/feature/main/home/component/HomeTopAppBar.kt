@@ -2,8 +2,6 @@ package io.github.kei_1111.circuit.sample.feature.main.home.component
 
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -11,15 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import circuit_sample.feature.main.generated.resources.Res
 import circuit_sample.feature.main.generated.resources.app_name
-import circuit_sample.feature.main.generated.resources.ic_settings
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeTopAppBar(
-    onClickSettings: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
@@ -29,16 +24,6 @@ fun HomeTopAppBar(
                 text = stringResource(Res.string.app_name),
             )
         },
-        actions = {
-            IconButton(
-                onClick = onClickSettings,
-            ) {
-                Icon(
-                    painter = painterResource(Res.drawable.ic_settings),
-                    contentDescription = null
-                )
-            }
-        }
     )
 }
 
@@ -47,9 +32,7 @@ fun HomeTopAppBar(
 private fun HomeTopAppBarPreview() {
     CircuitSampleTheme {
         Surface {
-            HomeTopAppBar(
-                onClickSettings = {}
-            )
+            HomeTopAppBar()
         }
     }
 }
