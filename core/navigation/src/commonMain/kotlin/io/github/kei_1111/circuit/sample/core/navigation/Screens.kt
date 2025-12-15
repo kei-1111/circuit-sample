@@ -14,3 +14,9 @@ object FavoriteScreen : Screen
 
 @CommonParcelize
 object SettingsScreen : Screen
+
+@CommonParcelize
+object MoreScreen : Screen
+
+@CommonParcelize
+object OssScreen : Screen

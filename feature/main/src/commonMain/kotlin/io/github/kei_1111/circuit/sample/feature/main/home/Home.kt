@@ -39,11 +39,7 @@ fun Home(
 ) {
     Scaffold(
         modifier = modifier,
-        topBar = {
-            HomeTopAppBar(
-                onClickSettings = { state.eventSink(HomeEvent.NavigateSettings) }
-            )
-        }
+        topBar = { HomeTopAppBar() }
     ) { innerPadding ->
         val layoutDirection = LocalLayoutDirection.current
         Row(

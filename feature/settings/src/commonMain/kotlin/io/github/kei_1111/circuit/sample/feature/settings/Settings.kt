@@ -22,6 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import circuit_sample.feature.settings.generated.resources.Res
+import circuit_sample.feature.settings.generated.resources.color_section_title
+import circuit_sample.feature.settings.generated.resources.save
+import circuit_sample.feature.settings.generated.resources.theme_section_title
 import com.slack.circuit.codegen.annotations.CircuitInject
 import io.github.kei_1111.circuit.sample.core.common.AppScope
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
@@ -31,6 +35,8 @@ import io.github.kei_1111.circuit.sample.feature.settings.component.ColorPickerB
 import io.github.kei_1111.circuit.sample.feature.settings.component.SettingsSection
 import io.github.kei_1111.circuit.sample.feature.settings.component.SettingsTopAppBar
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.getString
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @CircuitInject(SettingsScreen::class, AppScope::class)
@@ -45,7 +51,7 @@ fun Settings(
     LaunchedEffect(state.sideEffect) {
         when (val effect = state.sideEffect) {
             is SettingsSideEffect.ShowSnackbar -> {
-                scope.launch { snackbarHostState.showSnackbar(effect.message) }
+                scope.launch { snackbarHostState.showSnackbar(getString(effect.messageRes)) }
                 state.eventSink(SettingsEvent.ClearSideEffect)
             }
             null -> {}
@@ -83,13 +89,13 @@ fun Settings(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 SettingsSection(
-                    title = "アプリ テーマ",
+                    title = stringResource(Res.string.theme_section_title),
                     items = UserPreferences.Theme.entries,
                     selectedItem = state.theme,
                     onClickItem = { state.eventSink(SettingsEvent.UpdateTheme(it)) }
                 )
                 SettingsSection(
-                    title = "アプリ カラー",
+                    title = stringResource(Res.string.color_section_title),
                     items = listOf(
                         UserPreferences.SeedColor.Default,
                         (state.seedColor as? UserPreferences.SeedColor.Custom)
@@ -116,7 +122,7 @@ fun Settings(
                         .heightIn(48.dp)
                 ) {
                     Text(
-                        text = "保存",
+                        text = stringResource(Res.string.save),
                         style = MaterialTheme.typography.titleMedium,
                     )
                 }

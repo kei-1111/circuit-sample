@@ -26,6 +26,9 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        // Circuit 0.32.0-alpha02 (rememberSaveable状態保持バグ修正版) 用
+        // https://github.com/slackhq/circuit/discussions/2455
+        maven("https://oss.sonatype.org/content/repositories/snapshots")
     }
 }
 
@@ -39,4 +42,5 @@ include(":core:domain")
 include(":core:designsystem")
 include(":feature:main")
 include(":feature:settings")
+include(":feature:oss")
 include(":app-android")

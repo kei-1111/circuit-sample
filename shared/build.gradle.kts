@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
+    alias(libs.plugins.aboutLibraries)
     alias(libs.plugins.circuitSampleKmpLibrary)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
@@ -30,6 +31,7 @@ kotlin {
             }
             dependencies {
                 implementation(projects.feature.main)
+                implementation(projects.feature.oss)
                 implementation(projects.feature.settings)
                 implementation(projects.core.common)
                 implementation(projects.core.navigation)

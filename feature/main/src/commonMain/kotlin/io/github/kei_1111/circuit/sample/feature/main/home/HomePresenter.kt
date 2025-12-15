@@ -10,14 +10,11 @@ import com.slack.circuit.runtime.CircuitUiEvent
 import com.slack.circuit.runtime.CircuitUiState
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
-import com.slack.circuit.runtime.screen.Screen
 import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory
 import dev.zacsweers.metro.AssistedInject
 import io.github.kei_1111.circuit.sample.core.common.AppScope
-import io.github.kei_1111.circuit.sample.core.common.CommonParcelize
 import io.github.kei_1111.circuit.sample.core.navigation.HomeScreen
-import io.github.kei_1111.circuit.sample.core.navigation.SettingsScreen
 
 data class HomeState(
     val count: Int,
@@ -27,7 +24,6 @@ data class HomeState(
 sealed interface HomeEvent : CircuitUiEvent {
     data object Increase : HomeEvent
     data object Decrease : HomeEvent
-    data object NavigateSettings : HomeEvent
 }
 
 class HomePresenter @AssistedInject constructor(
@@ -50,7 +46,6 @@ class HomePresenter @AssistedInject constructor(
                 when (event) {
                     HomeEvent.Decrease -> count--
                     HomeEvent.Increase -> count++
-                    HomeEvent.NavigateSettings -> navigator.goTo(SettingsScreen)
                 }
             }
         )

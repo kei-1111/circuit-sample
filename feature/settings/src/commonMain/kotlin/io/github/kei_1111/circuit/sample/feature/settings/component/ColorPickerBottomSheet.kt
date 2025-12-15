@@ -19,9 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import circuit_sample.feature.settings.generated.resources.Res
+import circuit_sample.feature.settings.generated.resources.color_picker_title
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +51,7 @@ fun ColorPickerBottomSheet(
             verticalArrangement = Arrangement.spacedBy(24.dp),
         ) {
             Text(
-                text = "カラーを選択",
+                text = stringResource(Res.string.color_picker_title),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface
             )

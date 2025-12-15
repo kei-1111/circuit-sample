@@ -1,17 +1,16 @@
 [versions]
+aboutLibraries = "13.1.0"
 agp = "9.0.0-beta05"
 androidCompileSdk = "36"
 androidMinSdk = "24"
 androidTargetSdk = "36"
 androidxActivity = "1.12.0"
 androidxDataStore = "1.1.7"
-androidxLifecycle = "2.9.6"
-circuit = "0.31.0"
+# rememberSaveable状態保持バグ修正版 (https://github.com/slackhq/circuit/discussions/2455)
+circuit = "0.32.0-alpha02-composejb-1.10.0-rc02"
 colorPickerCompose = "1.1.3"
 composeMultiplatform = "1.10.0-rc02"
 kotlin = "2.3.0-RC3"
-kotlinSerialization = "2.1.21"
-kotlinxSerializationCore = "1.8.1"
 ksp = "2.3.2"
 material3 = "1.9.0"
 materialKolor = "4.0.0"
@@ -28,10 +27,10 @@ kspGradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin"
 metroGradle = { module = "dev.zacsweers.metro:dev.zacsweers.metro.gradle.plugin", version.ref = "metro" }
 
 # app dependencies
+aboutLibrariesCore = { module = "com.mikepenz:aboutlibraries-core", version.ref = "aboutLibraries" }
+aboutLibrariesComposeM3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
 androidxDataStorePreferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "androidxDataStore" }
 androidxActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
-androidxLifecycleRuntimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
-androidxLifecycleViewModelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 circuitCodegen = { module = "com.slack.circuit:circuit-codegen", version.ref = "circuit" }
 colorPickerCompose = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorPickerCompose" }
 circuitCodegenAnnotations = { module = "com.slack.circuit:circuit-codegen-annotations", version.ref = "circuit" }
@@ -43,18 +42,16 @@ composeRuntime = { module = "org.jetbrains.compose.runtime:runtime", version.ref
 composeUi = { module = "org.jetbrains.compose.ui:ui", version.ref = "composeMultiplatform" }
 composeUiTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "composeMultiplatform" }
 composeUiToolingPreview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "composeMultiplatform" }
-kotlinxSerializationCore = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
 materialKolor = { module = "com.materialkolor:material-kolor", version.ref = "materialKolor" }
 
 [plugins]
+aboutLibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "aboutLibraries" }
 androidApplication = { id = "com.android.application", version.ref = "agp" }
-androidLibrary = { id = "com.android.library", version.ref = "agp" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 kotlinParcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
-kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
 

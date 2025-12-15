@@ -1,4 +1,4 @@
-package io.github.kei_1111.circuit.sample.feature.main.favorite.component
+package io.github.kei_1111.circuit.sample.feature.main.more.component
 
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -8,31 +8,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import circuit_sample.feature.main.generated.resources.Res
-import circuit_sample.feature.main.generated.resources.favorite
+import circuit_sample.feature.main.generated.resources.more
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoriteTopAppBar(
+fun MoreTopAppBar(
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier,
         title = {
-            Text(
-                text = stringResource(Res.string.favorite),
-            )
-        }
+            Text(text = stringResource(Res.string.more))
+        },
     )
 }
 
 @Composable
 @Preview
-private fun FavoriteTopAppBarPreview() {
+private fun MoreTopAppBarPreview() {
     CircuitSampleTheme {
         Surface {
-            FavoriteTopAppBar()
+            MoreTopAppBar()
         }
     }
 }

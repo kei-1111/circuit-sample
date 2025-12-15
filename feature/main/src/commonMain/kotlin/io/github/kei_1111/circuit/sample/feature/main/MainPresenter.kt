@@ -12,12 +12,10 @@ import com.slack.circuit.runtime.CircuitUiEvent
 import com.slack.circuit.runtime.CircuitUiState
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
-import com.slack.circuit.runtime.screen.Screen
 import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory
 import dev.zacsweers.metro.AssistedInject
 import io.github.kei_1111.circuit.sample.core.common.AppScope
-import io.github.kei_1111.circuit.sample.core.common.CommonParcelize
 import io.github.kei_1111.circuit.sample.core.navigation.MainScreen
 
 data class MainState(
@@ -46,7 +44,7 @@ class MainPresenter @AssistedInject constructor(
         var selectedIndex by rememberSaveable { mutableIntStateOf(0) }
 
         return MainState(
-            navItems = listOf(BottomNavItem.Home, BottomNavItem.Favorite),
+            navItems = listOf(BottomNavItem.Home, BottomNavItem.Favorite, BottomNavItem.More),
             selectedIndex = selectedIndex,
             eventSink = { event ->
                 when (event) {
