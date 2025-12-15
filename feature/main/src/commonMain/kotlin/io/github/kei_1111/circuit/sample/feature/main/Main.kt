@@ -9,14 +9,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.slack.circuit.backstack.rememberSaveableBackStack
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.foundation.CircuitContent
-import com.slack.circuit.foundation.rememberCircuitNavigator
-import com.slack.circuit.runtime.Navigator
 import io.github.kei_1111.circuit.sample.core.common.AppScope
 import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.navigation.MainScreen
@@ -30,15 +26,6 @@ fun Main(
     modifier: Modifier = Modifier,
 ) {
     val currentScreen = state.navItems[state.selectedIndex].screen
-    val backStack = rememberSaveableBackStack(currentScreen)
-
-    LaunchedEffect(state.selectedIndex) {
-        val targetScreen = state.navItems[state.selectedIndex].screen
-        if (backStack.topRecord?.screen != targetScreen) {
-            backStack.popUntil { false }
-            backStack.push(targetScreen)
-        }
-    }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -89,7 +76,7 @@ private fun MainPreview() {
     CircuitSampleTheme {
         Main(
             state = MainState(
-                navItems = listOf(BottomNavItem.Home, BottomNavItem.Favorite),
+                navItems = listOf(BottomNavItem.Home, BottomNavItem.Favorite, BottomNavItem.More),
                 selectedIndex = 0,
                 eventSink = {}
             )
@@ -103,7 +90,7 @@ private fun MainBottomNavigationBarPreview() {
     CircuitSampleTheme {
         Surface {
             MainBottomNavigationBar(
-                navItems = listOf(BottomNavItem.Home, BottomNavItem.Favorite),
+                navItems = listOf(BottomNavItem.Home, BottomNavItem.Favorite, BottomNavItem.More),
                 selectedIndex = 0,
                 onSelectTab = {},
             )
