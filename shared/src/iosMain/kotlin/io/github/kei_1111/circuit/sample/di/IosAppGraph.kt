@@ -21,6 +21,7 @@ import io.github.kei_1111.circuit.sample.core.local.di.LocalScope
 import io.github.kei_1111.circuit.sample.core.navigation.FavoriteScreen
 import io.github.kei_1111.circuit.sample.core.navigation.HomeScreen
 import io.github.kei_1111.circuit.sample.core.navigation.MainScreen
+import io.github.kei_1111.circuit.sample.core.navigation.OssScreen
 import io.github.kei_1111.circuit.sample.core.navigation.SettingsScreen
 import io.github.kei_1111.circuit.sample.feature.main.Main
 import io.github.kei_1111.circuit.sample.feature.main.MainPresenter
@@ -31,6 +32,10 @@ import io.github.kei_1111.circuit.sample.feature.main.favorite.FavoriteState
 import io.github.kei_1111.circuit.sample.feature.main.home.Home
 import io.github.kei_1111.circuit.sample.feature.main.home.HomePresenter
 import io.github.kei_1111.circuit.sample.feature.main.home.HomeState
+import io.github.kei_1111.circuit.sample.feature.oss.Oss
+import io.github.kei_1111.circuit.sample.feature.oss.OssPresenter
+import io.github.kei_1111.circuit.sample.feature.oss.OssPresenterFactory
+import io.github.kei_1111.circuit.sample.feature.oss.OssState
 import io.github.kei_1111.circuit.sample.feature.settings.Settings
 import io.github.kei_1111.circuit.sample.feature.settings.SettingsPresenter
 import io.github.kei_1111.circuit.sample.feature.settings.SettingsState
@@ -71,6 +76,7 @@ interface IosAppGraph : AppGraph {
         homePresenterFactory: HomePresenter.Factory,
         favoritePresenterFactory: FavoritePresenter.Factory,
         settingsPresenterFactory: SettingsPresenter.Factory,
+        ossPresenterFactory: OssPresenter.Factory,
     ): Set<Presenter.Factory> = setOf(
         object : Presenter.Factory {
             override fun create(
@@ -82,6 +88,7 @@ interface IosAppGraph : AppGraph {
                 HomeScreen -> homePresenterFactory.create(navigator)
                 FavoriteScreen -> favoritePresenterFactory.create(navigator)
                 SettingsScreen -> settingsPresenterFactory.create(navigator)
+                OssScreen -> ossPresenterFactory.create(navigator)
                 else -> null
             }
         }
@@ -100,6 +107,7 @@ interface IosAppGraph : AppGraph {
                 HomeScreen -> ui<HomeState> { state, modifier -> Home(state, modifier) }
                 FavoriteScreen -> ui<FavoriteState> { state, modifier -> Favorite(state, modifier) }
                 SettingsScreen -> ui<SettingsState> { state, modifier -> Settings(state, modifier) }
+                OssScreen -> ui<OssState> { state, modifier -> Oss(state, modifier) }
                 else -> null
             }
         }

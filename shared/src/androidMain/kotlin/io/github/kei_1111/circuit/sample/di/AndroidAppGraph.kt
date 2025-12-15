@@ -7,6 +7,7 @@ import com.slack.circuit.runtime.ui.Ui
 import dev.zacsweers.metro.DependencyGraph
 import dev.zacsweers.metro.Provides
 import dev.zacsweers.metro.SingleIn
+import dev.zacsweers.metro.createGraphFactory
 import io.github.kei_1111.circuit.sample.core.common.AppScope
 import io.github.kei_1111.circuit.sample.core.data.di.DataBindings
 import io.github.kei_1111.circuit.sample.core.data.di.DataScope
@@ -14,7 +15,6 @@ import io.github.kei_1111.circuit.sample.core.local.DataStorePathProducer
 import io.github.kei_1111.circuit.sample.core.local.createDataStorePathProducer
 import io.github.kei_1111.circuit.sample.core.local.di.LocalBindings
 import io.github.kei_1111.circuit.sample.core.local.di.LocalScope
-import dev.zacsweers.metro.createGraphFactory
 
 /**
  * Android向けのDependencyGraph。
