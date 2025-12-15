@@ -8,8 +8,11 @@ import circuit_sample.feature.main.generated.resources.favorite
 import circuit_sample.feature.main.generated.resources.home
 import circuit_sample.feature.main.generated.resources.ic_favorite
 import circuit_sample.feature.main.generated.resources.ic_home
+import circuit_sample.feature.main.generated.resources.ic_more
+import circuit_sample.feature.main.generated.resources.more
 import io.github.kei_1111.circuit.sample.core.navigation.FavoriteScreen
 import io.github.kei_1111.circuit.sample.core.navigation.HomeScreen
+import io.github.kei_1111.circuit.sample.core.navigation.MoreScreen
 
 sealed class BottomNavItem(
     val screen: Screen,
@@ -26,5 +29,11 @@ sealed class BottomNavItem(
         screen = FavoriteScreen,
         icon = Res.drawable.ic_favorite,
         labelRes = Res.string.favorite
+    )
+
+    data object More : BottomNavItem(
+        screen = MoreScreen,
+        icon = Res.drawable.ic_more,
+        labelRes = Res.string.more
     )
 }
