@@ -19,6 +19,7 @@ kotlin {
             implementation(libs.library("composeMaterial3"))
             implementation(libs.library("composeUi"))
             implementation(libs.library("composeUiToolingPreview"))
+            implementation(libs.library("composeComponentsResources"))
         }
 
         androidMain.dependencies {
