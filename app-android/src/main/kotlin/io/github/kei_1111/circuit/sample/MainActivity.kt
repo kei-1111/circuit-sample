@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         val app = (application as CircuitSampleApplication).appGraph.app
 
         setContent {
-            app()
+            app(onRootPop = { finish() })
         }
     }
 }

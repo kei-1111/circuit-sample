@@ -41,6 +41,7 @@ kotlin {
                 implementation(projects.core.data)
                 implementation(projects.core.local)
                 implementation(projects.core.designsystem)
+                implementation(projects.core.ui)
 
                 implementation(libs.androidxDataStorePreferences)
                 implementation(libs.circuitCodegenAnnotations)

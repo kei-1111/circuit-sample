@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.foundation.CircuitContent
 import io.github.kei_1111.circuit.sample.core.common.AppScope
+import io.github.kei_1111.circuit.sample.core.ui.PlatformBackHandler
 import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.navigation.MainScreen
 import org.jetbrains.compose.resources.painterResource
@@ -26,6 +27,9 @@ fun Main(
     modifier: Modifier = Modifier,
 ) {
     val currentScreen = state.navItems[state.selectedIndex].screen
+
+    // システムバックボタンをハンドリング
+    PlatformBackHandler { state.eventSink(MainEvent.NavigateBack) }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),

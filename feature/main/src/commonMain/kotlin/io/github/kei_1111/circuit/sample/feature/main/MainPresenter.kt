@@ -27,6 +27,7 @@ data class MainState(
 sealed interface MainEvent : CircuitUiEvent {
     data class SelectTab(val index: Int) : MainEvent
     data class ChildNav(val navEvent: NavEvent) : MainEvent
+    data object NavigateBack : MainEvent
 }
 
 class MainPresenter @AssistedInject constructor(
@@ -50,6 +51,15 @@ class MainPresenter @AssistedInject constructor(
                 when (event) {
                     is MainEvent.SelectTab -> selectedIndex = event.index
                     is MainEvent.ChildNav -> navigator.onNavEvent(event.navEvent)
+                    MainEvent.NavigateBack -> {
+                        if (selectedIndex == 0) {
+                            // Homeタブではアプリを終了（popでonRootPopが呼ばれる）
+                            navigator.pop()
+                        } else {
+                            // それ以外のタブではHomeタブに戻る
+                            selectedIndex = 0
+                        }
+                    }
                 }
             }
         )
