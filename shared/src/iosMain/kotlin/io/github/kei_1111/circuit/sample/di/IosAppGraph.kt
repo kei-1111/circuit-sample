@@ -1,5 +1,11 @@
 package io.github.kei_1111.circuit.sample.di
 
+import coil3.ImageLoader
+import coil3.PlatformContext
+import coil3.disk.DiskCache
+import coil3.memory.MemoryCache
+import coil3.network.ktor3.KtorNetworkFetcherFactory
+import coil3.request.crossfade
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.runtime.CircuitContext
 import com.slack.circuit.runtime.Navigator
@@ -38,11 +44,17 @@ import io.github.kei_1111.circuit.sample.feature.main.more.MorePresenter
 import io.github.kei_1111.circuit.sample.feature.main.more.MoreState
 import io.github.kei_1111.circuit.sample.feature.oss.Oss
 import io.github.kei_1111.circuit.sample.feature.oss.OssPresenter
-import io.github.kei_1111.circuit.sample.feature.oss.OssPresenterFactory
 import io.github.kei_1111.circuit.sample.feature.oss.OssState
 import io.github.kei_1111.circuit.sample.feature.settings.Settings
 import io.github.kei_1111.circuit.sample.feature.settings.SettingsPresenter
 import io.github.kei_1111.circuit.sample.feature.settings.SettingsState
+import kotlinx.cinterop.ExperimentalForeignApi
+import okio.Path.Companion.toPath
+import platform.Foundation.NSCachesDirectory
+import platform.Foundation.NSSearchPathForDirectoriesInDomains
+import platform.Foundation.NSUserDomainMask
+
+private const val MAX_DISK_CACHE_SIZE = 100L * 1024L * 1024L // 100 MB
 
 /**
  * iOS向けのDependencyGraph。
@@ -133,6 +145,37 @@ interface IosAppGraph : AppGraph {
         .addPresenterFactories(presenterFactories)
         .addUiFactories(uiFactories)
         .build()
+
+    // ============================================
+    // ImageLoader
+    // ============================================
+
+    @OptIn(ExperimentalForeignApi::class)
+    @SingleIn(AppScope::class)
+    @Provides
+    fun provideImageLoader(): ImageLoader {
+        val cacheDir = NSSearchPathForDirectoriesInDomains(
+            NSCachesDirectory,
+            NSUserDomainMask,
+            true
+        ).first() as String
+
+        return ImageLoader.Builder(PlatformContext.INSTANCE)
+            .memoryCache {
+                MemoryCache.Builder()
+                    .maxSizePercent(PlatformContext.INSTANCE, percent = 0.25)
+                    .build()
+            }
+            .diskCache {
+                DiskCache.Builder()
+                    .directory("$cacheDir/image_cache".toPath())
+                    .maxSizeBytes(MAX_DISK_CACHE_SIZE)
+                    .build()
+            }
+            .components { add(KtorNetworkFetcherFactory()) }
+            .crossfade(true)
+            .build()
+    }
 }
 
 fun createIosAppGraph(): IosAppGraph = createGraphFactory<IosAppGraph.Factory>().create()

@@ -44,8 +44,20 @@ kotlin {
                 implementation(libs.androidxDataStorePreferences)
                 implementation(libs.circuitCodegenAnnotations)
                 implementation(libs.circuitFoundation)
+                implementation(libs.coilCompose)
+                implementation(libs.coilNetworkKtor3)
                 implementation(libs.composeMaterial3)
                 implementation(libs.composeRuntime)
+            }
+        }
+        androidMain {
+            dependencies {
+                implementation(libs.ktorClientOkhttp)
+            }
+        }
+        iosMain {
+            dependencies {
+                implementation(libs.ktorClientDarwin)
             }
         }
     }

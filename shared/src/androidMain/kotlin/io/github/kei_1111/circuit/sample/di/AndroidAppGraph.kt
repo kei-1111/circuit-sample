@@ -1,6 +1,11 @@
 package io.github.kei_1111.circuit.sample.di
 
 import android.content.Context
+import coil3.ImageLoader
+import coil3.disk.DiskCache
+import coil3.memory.MemoryCache
+import coil3.network.ktor3.KtorNetworkFetcherFactory
+import coil3.request.crossfade
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.ui.Ui
@@ -15,6 +20,9 @@ import io.github.kei_1111.circuit.sample.core.local.DataStorePathProducer
 import io.github.kei_1111.circuit.sample.core.local.createDataStorePathProducer
 import io.github.kei_1111.circuit.sample.core.local.di.LocalBindings
 import io.github.kei_1111.circuit.sample.core.local.di.LocalScope
+import okio.Path.Companion.toOkioPath
+
+private const val MAX_DISK_CACHE_SIZE = 100L * 1024L * 1024L // 100 MB
 
 /**
  * Android向けのDependencyGraph。
@@ -46,6 +54,25 @@ interface AndroidAppGraph : AppGraph {
     @Provides
     fun provideDataStorePathProducer(context: Context): DataStorePathProducer =
         createDataStorePathProducer(context)
+
+    @SingleIn(AppScope::class)
+    @Provides
+    fun provideImageLoader(context: Context): ImageLoader =
+        ImageLoader.Builder(context)
+            .memoryCache {
+                MemoryCache.Builder()
+                    .maxSizePercent(context, percent = 0.25)
+                    .build()
+            }
+            .diskCache {
+                DiskCache.Builder()
+                    .directory(context.cacheDir.resolve("image_cache").toOkioPath())
+                    .maxSizeBytes(MAX_DISK_CACHE_SIZE)
+                    .build()
+            }
+            .components { add(KtorNetworkFetcherFactory()) }
+            .crossfade(true)
+            .build()
 }
 
 fun createAndroidAppGraph(context: Context): AndroidAppGraph = createGraphFactory<AndroidAppGraph.Factory>().create(context)

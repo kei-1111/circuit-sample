@@ -48,4 +48,5 @@ dependencies {
     implementation(projects.feature.oss)
     implementation(projects.feature.settings)
     implementation(libs.androidxActivityCompose)
+    implementation(libs.coilCompose)
 }
