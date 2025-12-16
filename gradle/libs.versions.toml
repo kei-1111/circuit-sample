@@ -72,3 +72,4 @@ buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig"
 circuitSampleKmpLibrary = { id = "kmp.library" }
 circuitSampleKmpLibraryCompose = { id = "kmp.library.compose" }
 circuitSampleKmpFeature = { id = "kmp.feature" }
+circuitSampleBuildKonfig = { id = "buildkonfig" }

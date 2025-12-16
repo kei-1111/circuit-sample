@@ -21,4 +21,7 @@ dependencies {
     implementation(libs.composeGradle)
     implementation(libs.kspGradle)
     implementation(libs.metroGradle)
+    implementation(libs.buildKonfigGradle)
+    // FieldSpec.Type.STRINGのimportに必要 (https://github.com/yshrsmz/BuildKonfig/issues/227)
+    implementation(libs.buildKonfigCompiler)
 }
