@@ -8,6 +8,9 @@ on:
       - '**/build.gradle.kts'
       - 'gradle/libs.versions.toml'
 
+permissions:
+  contents: write
+
 jobs:
   update-aboutlibraries:
     runs-on: ubuntu-latest
