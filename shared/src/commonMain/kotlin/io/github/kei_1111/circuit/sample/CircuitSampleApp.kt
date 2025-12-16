@@ -9,6 +9,7 @@ import com.slack.circuit.foundation.CircuitCompositionLocals
 import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.backstack.rememberSaveableBackStack
 import com.slack.circuit.foundation.rememberCircuitNavigator
+import com.slack.circuit.sharedelements.SharedElementTransitionLayout
 import dev.zacsweers.metro.Inject
 import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.domain.GetSeedColorUseCase
@@ -34,7 +35,9 @@ class CircuitSampleApp(
             theme = theme
         ) {
             CircuitCompositionLocals(circuit) {
-                Surface { NavigableCircuitContent(navigator, backStack) }
+                SharedElementTransitionLayout {
+                    Surface { NavigableCircuitContent(navigator, backStack) }
+                }
             }
         }
     }

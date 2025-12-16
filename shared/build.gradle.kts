@@ -44,6 +44,7 @@ kotlin {
                 implementation(libs.androidxDataStorePreferences)
                 implementation(libs.circuitCodegenAnnotations)
                 implementation(libs.circuitFoundation)
+                implementation(libs.circuitSharedElements)
                 implementation(libs.coilCompose)
                 implementation(libs.coilNetworkKtor3)
                 implementation(libs.composeMaterial3)
