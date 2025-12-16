@@ -53,7 +53,6 @@ fun UserItem(
                 contentDescription = null,
                 modifier = Modifier
                     .aspectRatio(1f)
-                    .clip(RoundedCornerShape(8.dp))
                     .then (
                         if (sharedElementTransitionScope != null) {
                             with(sharedElementTransitionScope) {
@@ -66,7 +65,8 @@ fun UserItem(
                         } else {
                             Modifier
                         }
-                    ),
+                    )
+                    .clip(RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop,
             )
             Text(
