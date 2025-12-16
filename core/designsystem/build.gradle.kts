@@ -11,6 +11,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.model)
+            implementation(projects.core.ui)
             implementation(libs.circuitSharedElements)
             implementation(libs.coilCompose)
             implementation(libs.coilNetworkKtor3)
