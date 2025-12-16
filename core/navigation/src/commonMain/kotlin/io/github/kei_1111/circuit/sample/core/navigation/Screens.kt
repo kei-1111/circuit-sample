@@ -20,3 +20,6 @@ object MoreScreen : Screen
 
 @CommonParcelize
 object OssScreen : Screen
+
+@CommonParcelize
+data class DetailScreen(val userId: String) : Screen

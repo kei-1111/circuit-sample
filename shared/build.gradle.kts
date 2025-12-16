@@ -33,6 +33,7 @@ kotlin {
                 implementation(projects.feature.main)
                 implementation(projects.feature.oss)
                 implementation(projects.feature.settings)
+                implementation(projects.feature.detail)
                 implementation(projects.core.common)
                 implementation(projects.core.navigation)
                 implementation(projects.core.model)

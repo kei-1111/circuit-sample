@@ -24,12 +24,16 @@ import io.github.kei_1111.circuit.sample.core.local.DataStorePathProducer
 import io.github.kei_1111.circuit.sample.core.local.createDataStorePathProducer
 import io.github.kei_1111.circuit.sample.core.local.di.LocalBindings
 import io.github.kei_1111.circuit.sample.core.local.di.LocalScope
+import io.github.kei_1111.circuit.sample.core.navigation.DetailScreen
 import io.github.kei_1111.circuit.sample.core.navigation.FavoriteScreen
 import io.github.kei_1111.circuit.sample.core.navigation.HomeScreen
 import io.github.kei_1111.circuit.sample.core.navigation.MainScreen
 import io.github.kei_1111.circuit.sample.core.navigation.MoreScreen
 import io.github.kei_1111.circuit.sample.core.navigation.OssScreen
 import io.github.kei_1111.circuit.sample.core.navigation.SettingsScreen
+import io.github.kei_1111.circuit.sample.feature.detail.Detail
+import io.github.kei_1111.circuit.sample.feature.detail.DetailPresenter
+import io.github.kei_1111.circuit.sample.feature.detail.DetailState
 import io.github.kei_1111.circuit.sample.feature.main.Main
 import io.github.kei_1111.circuit.sample.feature.main.MainPresenter
 import io.github.kei_1111.circuit.sample.feature.main.MainState
@@ -94,6 +98,7 @@ interface IosAppGraph : AppGraph {
         morePresenterFactory: MorePresenter.Factory,
         settingsPresenterFactory: SettingsPresenter.Factory,
         ossPresenterFactory: OssPresenter.Factory,
+        detailPresenterFactory: DetailPresenter.Factory,
     ): Set<Presenter.Factory> = setOf(
         object : Presenter.Factory {
             override fun create(
@@ -107,6 +112,7 @@ interface IosAppGraph : AppGraph {
                 MoreScreen -> morePresenterFactory.create(navigator)
                 SettingsScreen -> settingsPresenterFactory.create(navigator)
                 OssScreen -> ossPresenterFactory.create(navigator)
+                is DetailScreen -> detailPresenterFactory.create(screen, navigator)
                 else -> null
             }
         }
@@ -127,6 +133,7 @@ interface IosAppGraph : AppGraph {
                 MoreScreen -> ui<MoreState> { state, modifier -> More(state, modifier) }
                 SettingsScreen -> ui<SettingsState> { state, modifier -> Settings(state, modifier) }
                 OssScreen -> ui<OssState> { state, modifier -> Oss(state, modifier) }
+                is DetailScreen -> ui<DetailState> { state, modifier -> Detail(state, modifier) }
                 else -> null
             }
         }
