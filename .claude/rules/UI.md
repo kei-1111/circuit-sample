@@ -15,14 +15,9 @@ paths: feature/**/*.kt
 | レイヤー | Eventの知識 | コールバックパターン |
 |---------|-------------|---------------------|
 | `*.kt` (Circuit UI) | あり | `state.eventSink(Event)` |
-| `component/*.kt` | なし | UIコールバック (例: `onClickSettings`) |
+| `component/*.kt` | なし | UIコールバック (例: `onClickBack`) |
 
 ### 構造例
-
-```
-Home.kt                    <- eventSink付きStateを受け取り、コールバックをEventにマッピング
-└── HomeTopAppBar.kt       <- onClickSettings: () -> Unit (Eventの知識なし)
-```
 
 ```
 Settings.kt                <- eventSink付きStateを受け取る
@@ -40,24 +35,27 @@ Settings.kt                <- eventSink付きStateを受け取る
 Screen レベルのComposableは`State`を受け取り、`eventSink`でイベントをディスパッチする。
 
 ```kotlin
-// Home.kt - Eventの知識あり
-@CircuitInject(HomeScreen::class, AppScope::class)
+// Settings.kt - Eventの知識あり
+@CircuitInject(SettingsScreen::class, AppScope::class)
 @Composable
-fun Home(
-    state: HomeState,
+fun Settings(
+    state: SettingsState,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
         topBar = {
-            HomeTopAppBar(
+            SettingsTopAppBar(
                 // UIコールバックをEventにマッピング
-                onClickSettings = { state.eventSink(HomeEvent.NavigateSettings) }
+                onClickBack = { state.eventSink(SettingsEvent.NavigateBack) }
             )
         }
     ) { innerPadding ->
-        IconButton(
-            onClick = { state.eventSink(HomeEvent.Increase) },
-        ) { ... }
+        SettingsSection(
+            title = "テーマ",
+            items = Theme.entries,
+            selectedItem = state.theme,
+            onClickItem = { state.eventSink(SettingsEvent.UpdateTheme(it)) }
+        )
     }
 }
 ```
@@ -67,17 +65,17 @@ fun Home(
 コンポーネントはシンプルなコールバックを受け取る純粋なUI要素。
 
 ```kotlin
-// HomeTopAppBar.kt - Eventの知識なし（純粋なUIコンポーネント）
+// SettingsTopAppBar.kt - Eventの知識なし（純粋なUIコンポーネント）
 @Composable
-fun HomeTopAppBar(
-    onClickSettings: () -> Unit,  // シンプルなコールバック、Event型なし
+fun SettingsTopAppBar(
+    onClickBack: () -> Unit,  // シンプルなコールバック、Event型なし
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
-        title = { Text("Circuit Sample") },
-        actions = {
-            IconButton(onClick = onClickSettings) {
-                Icon(painter = painterResource(Res.drawable.ic_settings), ...)
+        title = { Text(stringResource(Res.string.settings)) },
+        navigationIcon = {
+            IconButton(onClick = onClickBack) {
+                Icon(painter = painterResource(Res.drawable.ic_back), ...)
             }
         }
     )
@@ -135,11 +133,13 @@ fun <T : UserPreferences> SettingsSection(
 - 単一のUI責務に集中
 
 ```
-feature/home/
-├── Home.kt                  # Screen UI (@CircuitInject)
-├── HomePresenter.kt         # State + Event + Presenter
+feature/settings/
+├── Settings.kt              # Screen UI (@CircuitInject)
+├── SettingsPresenter.kt     # State + Event + Presenter
 └── component/
-    └── HomeTopAppBar.kt     # 純粋なUIコンポーネント
+    ├── SettingsTopAppBar.kt # 純粋なUIコンポーネント
+    ├── SettingsSection.kt   # 汎用コンポーネント
+    └── SettingsItem.kt      # 再利用可能なアイテム
 ```
 
 ---
@@ -151,11 +151,10 @@ feature/home/
 ```kotlin
 @Composable
 @Preview
-private fun HomePreview() {
+private fun SettingsPreview() {
     CircuitSampleTheme {
-        Home(
-            state = HomeState(
-                count = 10,
+        Settings(
+            state = SettingsState(
                 eventSink = {}  // プレビュー用の空ラムダ
             )
         )
@@ -168,11 +167,11 @@ private fun HomePreview() {
 ```kotlin
 @Composable
 @Preview
-private fun HomeTopAppBarPreview() {
+private fun SettingsTopAppBarPreview() {
     CircuitSampleTheme {
         Surface {
-            HomeTopAppBar(
-                onClickSettings = {}  // プレビュー用の空ラムダ
+            SettingsTopAppBar(
+                onClickBack = {}  // プレビュー用の空ラムダ
             )
         }
     }
