@@ -41,18 +41,6 @@ fun LicenseBottomSheet(
 
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
-            override fun onPostScroll(
-                consumed: Offset,
-                available: Offset,
-                source: NestedScrollSource
-            ): Offset {
-                return if (scrollState.value == 0) {
-                    Offset.Zero
-                } else {
-                    available
-                }
-            }
-
             override suspend fun onPostFling(
                 consumed: Velocity,
                 available: Velocity
