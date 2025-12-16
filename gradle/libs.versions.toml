@@ -1,5 +1,6 @@
 [versions]
 aboutLibraries = "13.1.0"
+buildKonfig = "0.17.1"
 agp = "9.0.0-beta05"
 androidCompileSdk = "36"
 androidMinSdk = "24"
@@ -28,6 +29,9 @@ composeCompilerGradle = { module = "org.jetbrains.kotlin:compose-compiler-gradle
 composeGradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "composeMultiplatform" }
 kspGradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
 metroGradle = { module = "dev.zacsweers.metro:dev.zacsweers.metro.gradle.plugin", version.ref = "metro" }
+buildKonfigGradle = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildKonfig" }
+# FieldSpec.Type.STRINGのimportに必要 (https://github.com/yshrsmz/BuildKonfig/issues/227)
+buildKonfigCompiler = { module = "com.codingfeline.buildkonfig:buildkonfig-compiler", version.ref = "buildKonfig" }
 
 # app dependencies
 aboutLibrariesCore = { module = "com.mikepenz:aboutlibraries-core", version.ref = "aboutLibraries" }
@@ -62,6 +66,7 @@ kotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", 
 kotlinParcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
+buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 
 # Convention Plugins
 circuitSampleKmpLibrary = { id = "kmp.library" }
