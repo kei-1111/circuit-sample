@@ -1,6 +1,7 @@
 package io.github.kei_1111.circuit.sample.feature.detail
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.CircuitUiEvent
@@ -48,7 +49,7 @@ class DetailPresenter @AssistedInject constructor(
 
     @Composable
     override fun present(): DetailState {
-        val userState = produceState<User?>(null, screen.userId) {
+        val user by produceState<User?>(null, screen.userId) {
             value = fetchUserUseCase(screen.userId)
         }
 
@@ -58,10 +59,10 @@ class DetailPresenter @AssistedInject constructor(
             }
         }
 
-        return when (val user = userState.value) {
+        return when (user) {
             null -> DetailState.Loading
             else -> DetailState.Stable(
-                user = user,
+                user = user!!,
                 eventSink = eventSink,
             )
         }
