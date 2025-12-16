@@ -3,7 +3,7 @@ package io.github.kei_1111.circuit.sample.core.data
 import io.github.kei_1111.circuit.sample.core.model.User
 import kotlinx.coroutines.delay
 
-class FavoriteUserRepositoryImpl : FavoriteUserRepository {
+class UserRepositoryImpl : UserRepository {
     override suspend fun fetchFavoriteUsers(): List<User> {
         delay(1000)
 
