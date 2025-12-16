@@ -1,5 +1,6 @@
 package io.github.kei_1111.circuit.sample.core.designsystem.component.feature
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -19,15 +20,21 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.slack.circuit.sharedelements.SharedElementTransitionScope
+import com.slack.circuit.sharedelements.SharedElementTransitionScope.AnimatedScope.Navigation
 import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.model.User
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun UserItem(
     user: User,
+    sharedElementTransitionScope: SharedElementTransitionScope?,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Surface(
+        onClick = onClick,
         modifier = modifier,
         color = MaterialTheme.colorScheme.surfaceContainer,
         shape = RoundedCornerShape(8.dp)
@@ -46,7 +53,20 @@ fun UserItem(
                 contentDescription = null,
                 modifier = Modifier
                     .aspectRatio(1f)
-                    .clip(RoundedCornerShape(8.dp)),
+                    .clip(RoundedCornerShape(8.dp))
+                    .then (
+                        if (sharedElementTransitionScope != null) {
+                            with(sharedElementTransitionScope) {
+                                Modifier
+                                    .sharedElement(
+                                        sharedContentState = rememberSharedContentState(key = "user_image_${user.id}"),
+                                        animatedVisibilityScope = requireAnimatedScope(Navigation),
+                                    )
+                            }
+                        } else {
+                            Modifier
+                        }
+                    ),
                 contentScale = ContentScale.Crop,
             )
             Text(
@@ -69,7 +89,9 @@ private fun UserItemPreview() {
                     id = "",
                     profileImageUrl = "/Users/kei/Documents/profile_icon.jpg",
                     name = "No.1"
-                )
+                ),
+                sharedElementTransitionScope = null,
+                onClick = {}
             )
         }
     }

@@ -18,6 +18,7 @@ import dev.zacsweers.metro.AssistedInject
 import io.github.kei_1111.circuit.sample.core.common.AppScope
 import io.github.kei_1111.circuit.sample.core.domain.FetchFavoriteUsersUseCase
 import io.github.kei_1111.circuit.sample.core.model.User
+import io.github.kei_1111.circuit.sample.core.navigation.DetailScreen
 import io.github.kei_1111.circuit.sample.core.navigation.FavoriteScreen
 
 data class FavoriteState(
@@ -26,7 +27,9 @@ data class FavoriteState(
     val eventSink: (FavoriteEvent) -> Unit,
 ) : CircuitUiState
 
-sealed interface FavoriteEvent : CircuitUiEvent
+sealed interface FavoriteEvent : CircuitUiEvent {
+    data class NavigateDetail(val userId: String) : FavoriteEvent
+}
 
 class FavoritePresenter @AssistedInject constructor(
     @Assisted private val navigator: Navigator,
@@ -54,7 +57,7 @@ class FavoritePresenter @AssistedInject constructor(
             users = users,
             eventSink = { event ->
                 when (event) {
-                    else -> {}
+                    is FavoriteEvent.NavigateDetail -> navigator.goTo(DetailScreen(event.userId))
                 }
             }
         )
