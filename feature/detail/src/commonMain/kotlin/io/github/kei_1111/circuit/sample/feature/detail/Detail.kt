@@ -34,6 +34,7 @@ import io.github.kei_1111.circuit.sample.core.common.AppScope
 import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.model.User
 import io.github.kei_1111.circuit.sample.core.navigation.DetailScreen
+import io.github.kei_1111.circuit.sample.feature.detail.buildkonfig.BuildKonfig
 import io.github.kei_1111.circuit.sample.feature.detail.component.DetailTopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
@@ -141,7 +142,7 @@ private class DetailPPP : CollectionPreviewParameterProvider<DetailPreviewParame
             state = DetailState.Stable(
                 user = User(
                     id = "",
-                    profileImageUrl = "/Users/kei/Documents/profile_icon.jpg",
+                    profileImageUrl = "${BuildKonfig.DRAWABLE_PATH}/img_profile_icon_preview.webp",
                     name = "No.1"
                 ),
                 eventSink = {},

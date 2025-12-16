@@ -1,4 +1,5 @@
 plugins {
+    alias(libs.plugins.circuitSampleBuildKonfig)
     alias(libs.plugins.circuitSampleKmpLibraryCompose)
 }
 

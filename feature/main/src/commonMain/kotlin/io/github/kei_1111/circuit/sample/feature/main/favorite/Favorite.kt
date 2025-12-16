@@ -26,6 +26,7 @@ import io.github.kei_1111.circuit.sample.core.designsystem.component.feature.Use
 import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.model.User
 import io.github.kei_1111.circuit.sample.core.navigation.FavoriteScreen
+import io.github.kei_1111.circuit.sample.feature.main.buildkonfig.BuildKonfig
 import io.github.kei_1111.circuit.sample.feature.main.favorite.component.FavoriteTopAppBar
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -88,7 +89,7 @@ private fun FavoritePreview() {
                 users = List(30) { index ->
                     User(
                         id = "user_$index",
-                        profileImageUrl = "/Users/kei/Documents/profile_icon.jpg",
+                        profileImageUrl = "${BuildKonfig.DRAWABLE_PATH}/img_profile_icon_preview.webp",
                         name = index.toString()
                     )
                 },
