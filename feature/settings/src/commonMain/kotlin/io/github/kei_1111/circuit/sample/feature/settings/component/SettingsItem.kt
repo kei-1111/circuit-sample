@@ -30,7 +30,7 @@ import circuit_sample.feature.settings.generated.resources.Res
 import circuit_sample.feature.settings.generated.resources.ic_dark_mode
 import circuit_sample.feature.settings.generated.resources.ic_light_mode
 import circuit_sample.feature.settings.generated.resources.ic_system
-import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
+import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import org.jetbrains.compose.resources.painterResource
 

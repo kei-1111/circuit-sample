@@ -26,7 +26,7 @@ import circuit_sample.feature.main.generated.resources.ic_add
 import circuit_sample.feature.main.generated.resources.ic_remove
 import com.slack.circuit.codegen.annotations.CircuitInject
 import io.github.kei_1111.circuit.sample.core.common.AppScope
-import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
+import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.navigation.HomeScreen
 import io.github.kei_1111.circuit.sample.feature.main.home.component.HomeTopAppBar
 import org.jetbrains.compose.resources.painterResource
@@ -37,11 +37,12 @@ fun Home(
     state: HomeState,
     modifier: Modifier = Modifier,
 ) {
+    val layoutDirection = LocalLayoutDirection.current
+
     Scaffold(
         modifier = modifier,
         topBar = { HomeTopAppBar() }
     ) { innerPadding ->
-        val layoutDirection = LocalLayoutDirection.current
         Row(
             modifier = Modifier
                 .fillMaxSize()

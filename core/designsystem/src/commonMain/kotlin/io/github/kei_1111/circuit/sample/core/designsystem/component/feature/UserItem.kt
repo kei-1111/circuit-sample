@@ -1,75 +1,75 @@
-package io.github.kei_1111.circuit.sample.feature.main.more.component
+package io.github.kei_1111.circuit.sample.core.designsystem.component.feature
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import circuit_sample.feature.main.generated.resources.Res
-import circuit_sample.feature.main.generated.resources.ic_settings
-import circuit_sample.feature.main.generated.resources.settings
+import coil3.compose.AsyncImage
 import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
+import io.github.kei_1111.circuit.sample.core.model.User
 
 @Composable
-fun MoreMenuItem(
-    icon: DrawableResource,
-    labelRes: StringResource,
-    onClick: () -> Unit,
+fun UserItem(
+    user: User,
     modifier: Modifier = Modifier,
 ) {
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(8.dp),
         color = MaterialTheme.colorScheme.surfaceContainer,
+        shape = RoundedCornerShape(8.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable(onClick = onClick)
+                .height(56.dp)
                 .padding(horizontal = 8.dp)
-                .padding(vertical = 12.dp),
+                .padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Icon(
-                painter = painterResource(icon),
+            AsyncImage(
+                model = user.profileImageUrl,
                 contentDescription = null,
-                modifier = Modifier.size(16.dp),
-                tint = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier
+                    .aspectRatio(1f)
+                    .clip(RoundedCornerShape(8.dp)),
+                contentScale = ContentScale.Crop,
             )
             Text(
-                text = stringResource(labelRes),
-                style = MaterialTheme.typography.bodyLarge,
+                text = user.name,
                 color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.titleMedium,
             )
         }
     }
 }
 
+
 @Composable
 @Preview
-private fun MoreMenuItemPreview() {
+private fun UserItemPreview() {
     CircuitSampleTheme {
         Surface {
-            MoreMenuItem(
-                icon = Res.drawable.ic_settings,
-                labelRes = Res.string.settings,
-                onClick = {},
+            UserItem(
+                user = User(
+                    id = "",
+                    profileImageUrl = "/Users/kei/Documents/profile_icon.jpg",
+                    name = "No.1"
+                )
             )
         }
     }

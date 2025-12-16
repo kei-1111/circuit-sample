@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.foundation.CircuitContent
 import io.github.kei_1111.circuit.sample.core.common.AppScope
-import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
+import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.navigation.MainScreen
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

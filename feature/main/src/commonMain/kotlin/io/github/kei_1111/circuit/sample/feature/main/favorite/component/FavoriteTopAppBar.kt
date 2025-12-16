@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import circuit_sample.feature.main.generated.resources.Res
 import circuit_sample.feature.main.generated.resources.favorite
-import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
+import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)

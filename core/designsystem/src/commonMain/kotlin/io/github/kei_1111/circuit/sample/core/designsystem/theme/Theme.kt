@@ -1,4 +1,4 @@
-package io.github.kei_1111.circuit.sample.core.designsystem
+package io.github.kei_1111.circuit.sample.core.designsystem.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

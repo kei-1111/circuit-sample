@@ -28,7 +28,7 @@ import circuit_sample.feature.settings.generated.resources.save
 import circuit_sample.feature.settings.generated.resources.theme_section_title
 import com.slack.circuit.codegen.annotations.CircuitInject
 import io.github.kei_1111.circuit.sample.core.common.AppScope
-import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
+import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import io.github.kei_1111.circuit.sample.core.navigation.SettingsScreen
 import io.github.kei_1111.circuit.sample.feature.settings.component.ColorPickerBottomSheet

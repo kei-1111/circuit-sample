@@ -10,7 +10,7 @@ import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.backstack.rememberSaveableBackStack
 import com.slack.circuit.foundation.rememberCircuitNavigator
 import dev.zacsweers.metro.Inject
-import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
+import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.domain.GetSeedColorUseCase
 import io.github.kei_1111.circuit.sample.core.domain.GetThemeUseCase
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
