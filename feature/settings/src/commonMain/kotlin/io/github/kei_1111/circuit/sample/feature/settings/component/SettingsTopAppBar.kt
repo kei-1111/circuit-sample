@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import circuit_sample.feature.settings.generated.resources.Res
 import circuit_sample.feature.settings.generated.resources.ic_back
 import circuit_sample.feature.settings.generated.resources.settings
-import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
+import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

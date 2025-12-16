@@ -8,7 +8,10 @@ androidxActivity = "1.12.0"
 androidxDataStore = "1.1.7"
 # rememberSaveable状態保持バグ修正版 (https://github.com/slackhq/circuit/discussions/2455)
 circuit = "0.32.0-alpha02-composejb-1.10.0-rc02"
+circuitSharedElements = "0.31.0"
+coil = "3.3.0"
 colorPickerCompose = "1.1.3"
+ktor = "3.3.3"
 composeMultiplatform = "1.10.0-rc02"
 kotlin = "2.3.0-RC3"
 ksp = "2.3.2"
@@ -32,9 +35,14 @@ aboutLibrariesComposeM3 = { module = "com.mikepenz:aboutlibraries-compose-m3", v
 androidxDataStorePreferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "androidxDataStore" }
 androidxActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 circuitCodegen = { module = "com.slack.circuit:circuit-codegen", version.ref = "circuit" }
+coilCompose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coilNetworkKtor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 colorPickerCompose = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorPickerCompose" }
+ktorClientOkhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktorClientDarwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 circuitCodegenAnnotations = { module = "com.slack.circuit:circuit-codegen-annotations", version.ref = "circuit" }
 circuitFoundation = { module = "com.slack.circuit:circuit-foundation", version.ref = "circuit" }
+circuitSharedElements = { module = "com.slack.circuit:circuit-sharedelements", version.ref = "circuitSharedElements" }
 composeComponentsResources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "composeMultiplatform" }
 composeFoundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "composeMultiplatform" }
 composeMaterial3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }

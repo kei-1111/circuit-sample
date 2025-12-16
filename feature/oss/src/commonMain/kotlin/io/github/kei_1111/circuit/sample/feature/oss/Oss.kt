@@ -12,7 +12,7 @@ import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
 import com.mikepenz.aboutlibraries.ui.compose.produceLibraries
 import com.slack.circuit.codegen.annotations.CircuitInject
 import io.github.kei_1111.circuit.sample.core.common.AppScope
-import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
+import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.navigation.OssScreen
 import io.github.kei_1111.circuit.sample.feature.oss.component.OssTopAppBar
 

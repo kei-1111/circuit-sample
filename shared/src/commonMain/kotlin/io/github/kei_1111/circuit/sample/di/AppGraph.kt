@@ -1,5 +1,6 @@
 package io.github.kei_1111.circuit.sample.di
 
+import coil3.ImageLoader
 import io.github.kei_1111.circuit.sample.CircuitSampleApp
 
 /**
@@ -12,4 +13,5 @@ import io.github.kei_1111.circuit.sample.CircuitSampleApp
  */
 interface AppGraph {
     val app: CircuitSampleApp
+    val imageLoader: ImageLoader
 }

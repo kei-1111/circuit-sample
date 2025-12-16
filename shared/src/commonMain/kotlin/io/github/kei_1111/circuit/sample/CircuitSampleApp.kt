@@ -1,5 +1,6 @@
 package io.github.kei_1111.circuit.sample
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -9,13 +10,15 @@ import com.slack.circuit.foundation.CircuitCompositionLocals
 import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.backstack.rememberSaveableBackStack
 import com.slack.circuit.foundation.rememberCircuitNavigator
+import com.slack.circuit.sharedelements.SharedElementTransitionLayout
 import dev.zacsweers.metro.Inject
-import io.github.kei_1111.circuit.sample.core.designsystem.CircuitSampleTheme
+import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.domain.GetSeedColorUseCase
 import io.github.kei_1111.circuit.sample.core.domain.GetThemeUseCase
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import io.github.kei_1111.circuit.sample.core.navigation.MainScreen
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Inject
 class CircuitSampleApp(
     private val circuit: Circuit,
@@ -34,7 +37,9 @@ class CircuitSampleApp(
             theme = theme
         ) {
             CircuitCompositionLocals(circuit) {
-                Surface { NavigableCircuitContent(navigator, backStack) }
+                SharedElementTransitionLayout {
+                    Surface { NavigableCircuitContent(navigator, backStack) }
+                }
             }
         }
     }

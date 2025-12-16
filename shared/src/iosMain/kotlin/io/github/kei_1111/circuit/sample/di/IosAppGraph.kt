@@ -1,5 +1,11 @@
 package io.github.kei_1111.circuit.sample.di
 
+import coil3.ImageLoader
+import coil3.PlatformContext
+import coil3.disk.DiskCache
+import coil3.memory.MemoryCache
+import coil3.network.ktor3.KtorNetworkFetcherFactory
+import coil3.request.crossfade
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.runtime.CircuitContext
 import com.slack.circuit.runtime.Navigator
@@ -18,12 +24,16 @@ import io.github.kei_1111.circuit.sample.core.local.DataStorePathProducer
 import io.github.kei_1111.circuit.sample.core.local.createDataStorePathProducer
 import io.github.kei_1111.circuit.sample.core.local.di.LocalBindings
 import io.github.kei_1111.circuit.sample.core.local.di.LocalScope
+import io.github.kei_1111.circuit.sample.core.navigation.DetailScreen
 import io.github.kei_1111.circuit.sample.core.navigation.FavoriteScreen
 import io.github.kei_1111.circuit.sample.core.navigation.HomeScreen
 import io.github.kei_1111.circuit.sample.core.navigation.MainScreen
 import io.github.kei_1111.circuit.sample.core.navigation.MoreScreen
 import io.github.kei_1111.circuit.sample.core.navigation.OssScreen
 import io.github.kei_1111.circuit.sample.core.navigation.SettingsScreen
+import io.github.kei_1111.circuit.sample.feature.detail.Detail
+import io.github.kei_1111.circuit.sample.feature.detail.DetailPresenter
+import io.github.kei_1111.circuit.sample.feature.detail.DetailState
 import io.github.kei_1111.circuit.sample.feature.main.Main
 import io.github.kei_1111.circuit.sample.feature.main.MainPresenter
 import io.github.kei_1111.circuit.sample.feature.main.MainState
@@ -38,11 +48,17 @@ import io.github.kei_1111.circuit.sample.feature.main.more.MorePresenter
 import io.github.kei_1111.circuit.sample.feature.main.more.MoreState
 import io.github.kei_1111.circuit.sample.feature.oss.Oss
 import io.github.kei_1111.circuit.sample.feature.oss.OssPresenter
-import io.github.kei_1111.circuit.sample.feature.oss.OssPresenterFactory
 import io.github.kei_1111.circuit.sample.feature.oss.OssState
 import io.github.kei_1111.circuit.sample.feature.settings.Settings
 import io.github.kei_1111.circuit.sample.feature.settings.SettingsPresenter
 import io.github.kei_1111.circuit.sample.feature.settings.SettingsState
+import kotlinx.cinterop.ExperimentalForeignApi
+import okio.Path.Companion.toPath
+import platform.Foundation.NSCachesDirectory
+import platform.Foundation.NSSearchPathForDirectoriesInDomains
+import platform.Foundation.NSUserDomainMask
+
+private const val MAX_DISK_CACHE_SIZE = 100L * 1024L * 1024L // 100 MB
 
 /**
  * iOS向けのDependencyGraph。
@@ -82,6 +98,7 @@ interface IosAppGraph : AppGraph {
         morePresenterFactory: MorePresenter.Factory,
         settingsPresenterFactory: SettingsPresenter.Factory,
         ossPresenterFactory: OssPresenter.Factory,
+        detailPresenterFactory: DetailPresenter.Factory,
     ): Set<Presenter.Factory> = setOf(
         object : Presenter.Factory {
             override fun create(
@@ -95,6 +112,7 @@ interface IosAppGraph : AppGraph {
                 MoreScreen -> morePresenterFactory.create(navigator)
                 SettingsScreen -> settingsPresenterFactory.create(navigator)
                 OssScreen -> ossPresenterFactory.create(navigator)
+                is DetailScreen -> detailPresenterFactory.create(screen, navigator)
                 else -> null
             }
         }
@@ -115,6 +133,7 @@ interface IosAppGraph : AppGraph {
                 MoreScreen -> ui<MoreState> { state, modifier -> More(state, modifier) }
                 SettingsScreen -> ui<SettingsState> { state, modifier -> Settings(state, modifier) }
                 OssScreen -> ui<OssState> { state, modifier -> Oss(state, modifier) }
+                is DetailScreen -> ui<DetailState> { state, modifier -> Detail(state, modifier) }
                 else -> null
             }
         }
@@ -133,6 +152,37 @@ interface IosAppGraph : AppGraph {
         .addPresenterFactories(presenterFactories)
         .addUiFactories(uiFactories)
         .build()
+
+    // ============================================
+    // ImageLoader
+    // ============================================
+
+    @OptIn(ExperimentalForeignApi::class)
+    @SingleIn(AppScope::class)
+    @Provides
+    fun provideImageLoader(): ImageLoader {
+        val cacheDir = NSSearchPathForDirectoriesInDomains(
+            NSCachesDirectory,
+            NSUserDomainMask,
+            true
+        ).first() as String
+
+        return ImageLoader.Builder(PlatformContext.INSTANCE)
+            .memoryCache {
+                MemoryCache.Builder()
+                    .maxSizePercent(PlatformContext.INSTANCE, percent = 0.25)
+                    .build()
+            }
+            .diskCache {
+                DiskCache.Builder()
+                    .directory("$cacheDir/image_cache".toPath())
+                    .maxSizeBytes(MAX_DISK_CACHE_SIZE)
+                    .build()
+            }
+            .components { add(KtorNetworkFetcherFactory()) }
+            .crossfade(true)
+            .build()
+    }
 }
 
 fun createIosAppGraph(): IosAppGraph = createGraphFactory<IosAppGraph.Factory>().create()

@@ -10,6 +10,9 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.model)
+            implementation(libs.circuitSharedElements)
+            implementation(libs.coilCompose)
+            implementation(libs.coilNetworkKtor3)
             implementation(libs.materialKolor)
         }
     }

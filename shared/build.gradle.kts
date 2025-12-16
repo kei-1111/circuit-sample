@@ -33,6 +33,7 @@ kotlin {
                 implementation(projects.feature.main)
                 implementation(projects.feature.oss)
                 implementation(projects.feature.settings)
+                implementation(projects.feature.detail)
                 implementation(projects.core.common)
                 implementation(projects.core.navigation)
                 implementation(projects.core.model)
@@ -44,8 +45,21 @@ kotlin {
                 implementation(libs.androidxDataStorePreferences)
                 implementation(libs.circuitCodegenAnnotations)
                 implementation(libs.circuitFoundation)
+                implementation(libs.circuitSharedElements)
+                implementation(libs.coilCompose)
+                implementation(libs.coilNetworkKtor3)
                 implementation(libs.composeMaterial3)
                 implementation(libs.composeRuntime)
+            }
+        }
+        androidMain {
+            dependencies {
+                implementation(libs.ktorClientOkhttp)
+            }
+        }
+        iosMain {
+            dependencies {
+                implementation(libs.ktorClientDarwin)
             }
         }
     }
