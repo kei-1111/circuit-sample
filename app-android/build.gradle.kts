@@ -47,6 +47,7 @@ dependencies {
     implementation(projects.feature.main)
     implementation(projects.feature.oss)
     implementation(projects.feature.settings)
+    implementation(projects.feature.detail)
     implementation(libs.androidxActivityCompose)
     implementation(libs.coilCompose)
 }

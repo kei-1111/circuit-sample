@@ -1,5 +1,6 @@
 package io.github.kei_1111.circuit.sample
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -17,6 +18,7 @@ import io.github.kei_1111.circuit.sample.core.domain.GetThemeUseCase
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import io.github.kei_1111.circuit.sample.core.navigation.MainScreen
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Inject
 class CircuitSampleApp(
     private val circuit: Circuit,
