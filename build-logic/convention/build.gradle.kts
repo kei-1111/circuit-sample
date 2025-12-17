@@ -19,6 +19,7 @@ dependencies {
     implementation(libs.kotlinGradle)
     implementation(libs.composeCompilerGradle)
     implementation(libs.composeGradle)
+    implementation(libs.detektGradle)
     implementation(libs.kspGradle)
     implementation(libs.metroGradle)
     implementation(libs.buildKonfigGradle)

@@ -79,3 +79,4 @@ circuitSampleKmpLibrary = { id = "kmp.library" }
 circuitSampleKmpLibraryCompose = { id = "kmp.library.compose" }
 circuitSampleKmpFeature = { id = "kmp.feature" }
 circuitSampleBuildKonfig = { id = "buildkonfig" }
+circuitSampleDetekt = { id = "detekt" }
