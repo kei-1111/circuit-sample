@@ -4,9 +4,13 @@
 [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform) + [Circuit](https://github.com/slackhq/circuit)を使用したサンプルアプリ
 
 ## スクリーンショット
-Home | Favorite | More | Detail | Settings | OSS
-:---: | :---: | :---: | :---: | :---: | :---: 
-<img src="https://github.com/user-attachments/assets/ed751917-15c5-49d5-b4a2-2095e99eb85d" width="300"/> | <img src="https://github.com/user-attachments/assets/d61bd9cb-15b3-40ec-bf1c-4b5a97b5498b" width="300"/> | <img src="https://github.com/user-attachments/assets/f57a3f53-4217-4f44-b60f-f64a016b2005" width="300"/> | <img src="https://github.com/user-attachments/assets/70238528-d300-4e4e-9414-34b57a90b790" width="300"/> | <img src="https://github.com/user-attachments/assets/a645b494-ad41-4e15-9405-91827f1fba3c" width="300"/> | <img src="https://github.com/user-attachments/assets/9a1674c2-35a8-4eaf-893e-90547909a54d" width="300"/>
+Home | Favorite | More 
+:---: | :---: | :---:  
+<img src="https://github.com/user-attachments/assets/ed751917-15c5-49d5-b4a2-2095e99eb85d" width="300"/> | <img src="https://github.com/user-attachments/assets/d61bd9cb-15b3-40ec-bf1c-4b5a97b5498b" width="300"/> | <img src="https://github.com/user-attachments/assets/f57a3f53-4217-4f44-b60f-f64a016b2005" width="300"/> 
+
+Detail | Settings | OSS
+:---: | :---: | :---: 
+<img src="https://github.com/user-attachments/assets/70238528-d300-4e4e-9414-34b57a90b790" width="300"/> | <img src="https://github.com/user-attachments/assets/a645b494-ad41-4e15-9405-91827f1fba3c" width="300"/> | <img src="https://github.com/user-attachments/assets/9a1674c2-35a8-4eaf-893e-90547909a54d" width="300"/>
 
 
 ## 使用ライブラリ
