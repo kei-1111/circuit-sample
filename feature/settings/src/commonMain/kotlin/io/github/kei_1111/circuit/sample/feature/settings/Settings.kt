@@ -131,7 +131,6 @@ fun Settings(
     }
 }
 
-
 @Composable
 @Preview
 private fun SettingsPreview() {

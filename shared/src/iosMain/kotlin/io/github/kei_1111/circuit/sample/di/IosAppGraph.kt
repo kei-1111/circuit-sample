@@ -107,7 +107,7 @@ interface IosAppGraph : AppGraph {
                 context: CircuitContext
             ): Presenter<*>? = when (screen) {
                 MainScreen -> mainPresenterFactory.create(navigator)
-                HomeScreen -> homePresenterFactory.create(navigator)
+                HomeScreen -> homePresenterFactory.create()
                 FavoriteScreen -> favoritePresenterFactory.create(navigator)
                 MoreScreen -> morePresenterFactory.create(navigator)
                 SettingsScreen -> settingsPresenterFactory.create(navigator)

@@ -10,7 +10,11 @@ sealed interface UserPreferences {
     sealed interface SeedColor : UserPreferences {
         val color: Color
 
-        data object Default : SeedColor { override val color: Color = Color(0xFF6750A4) }
+        data object Default : SeedColor { override val color: Color = DEFAULT_COLOR }
         data class Custom(override val color: Color) : SeedColor
+    }
+
+    private companion object {
+        val DEFAULT_COLOR = Color(0xFF6750A4)
     }
 }

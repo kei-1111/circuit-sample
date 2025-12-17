@@ -53,12 +53,12 @@ fun UserItem(
                 contentDescription = null,
                 modifier = Modifier
                     .aspectRatio(1f)
-                    .then (
+                    .then(
                         if (sharedElementTransitionScope != null) {
                             with(sharedElementTransitionScope) {
                                 Modifier
                                     .sharedElement(
-                                        sharedContentState = rememberSharedContentState(key = "user_image_${user.id}"),
+                                        sharedContentState = rememberSharedContentState("user_image_${user.id}"),
                                         animatedVisibilityScope = requireAnimatedScope(Navigation),
                                     )
                             }
@@ -77,7 +77,6 @@ fun UserItem(
         }
     }
 }
-
 
 @Composable
 @Preview

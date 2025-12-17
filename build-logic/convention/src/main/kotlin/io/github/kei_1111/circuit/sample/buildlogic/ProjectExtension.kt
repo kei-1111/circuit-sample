@@ -12,8 +12,8 @@ import org.gradle.plugin.use.PluginDependency
 internal fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? =
     add("implementation", dependencyNotation)
 
-internal fun DependencyHandler.debugImplementation(dependencyNotation: Any): Dependency? =
-    add("debugImplementation", dependencyNotation)
+internal fun DependencyHandler.detektPlugins(dependencyNotation: Any): Dependency? =
+    add("detektPlugins", dependencyNotation)
 
 internal val Project.libs
     get(): VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")

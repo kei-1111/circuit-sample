@@ -75,4 +75,5 @@ interface AndroidAppGraph : AppGraph {
             .build()
 }
 
-fun createAndroidAppGraph(context: Context): AndroidAppGraph = createGraphFactory<AndroidAppGraph.Factory>().create(context)
+fun createAndroidAppGraph(context: Context): AndroidAppGraph =
+    createGraphFactory<AndroidAppGraph.Factory>().create(context)

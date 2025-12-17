@@ -90,7 +90,7 @@ fun Detail(
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier
                                     .sharedElement(
-                                        sharedContentState = rememberSharedContentState(key = "user_image_${state.user.id}"),
+                                        sharedContentState = rememberSharedContentState("user_image_${state.user.id}"),
                                         animatedVisibilityScope = requireAnimatedScope(Navigation),
                                     )
                                     .size(120.dp)

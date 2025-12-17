@@ -8,9 +8,7 @@ import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.retained.rememberRetained
 import com.slack.circuit.runtime.CircuitUiEvent
 import com.slack.circuit.runtime.CircuitUiState
-import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
-import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory
 import dev.zacsweers.metro.AssistedInject
 import io.github.kei_1111.circuit.sample.core.common.AppScope
@@ -26,14 +24,13 @@ sealed interface HomeEvent : CircuitUiEvent {
     data object Decrease : HomeEvent
 }
 
-class HomePresenter @AssistedInject constructor(
-    @Assisted private val navigator: Navigator,
-) : Presenter<HomeState> {
+@AssistedInject
+class HomePresenter : Presenter<HomeState> {
 
     @CircuitInject(HomeScreen::class, AppScope::class)
     @AssistedFactory
     fun interface Factory {
-        fun create(navigator: Navigator): HomePresenter
+        fun create(): HomePresenter
     }
 
     @Composable
