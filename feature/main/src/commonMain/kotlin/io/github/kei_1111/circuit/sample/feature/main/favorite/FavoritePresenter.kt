@@ -39,14 +39,17 @@ class FavoritePresenter @AssistedInject constructor(
             isLoading = false
         }
 
-        return FavoriteState(
-            isLoading = isLoading,
-            users = users,
-            eventSink = { event ->
-                when (event) {
-                    is FavoriteEvent.NavigateDetail -> navigator.goTo(DetailScreen(event.userId))
+        return if (isLoading) {
+            FavoriteState.Loading
+        } else {
+            FavoriteState.Stable(
+                users = users,
+                eventSink = { event ->
+                    when (event) {
+                        is FavoriteEvent.NavigateDetail -> navigator.goTo(DetailScreen(event.userId))
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 }

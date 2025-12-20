@@ -42,13 +42,17 @@ internal fun FavoriteContent(
                 .fillMaxSize(),
             contentAlignment = Alignment.Center,
         ) {
-            if (state.isLoading) {
-                FavoriteLoading()
-            } else {
-                FavoriteStable(
-                    users = state.users,
-                    onClickUser = { state.eventSink(FavoriteEvent.NavigateDetail(it.id)) }
-                )
+            when (state) {
+                FavoriteState.Loading -> {
+                    FavoriteLoading()
+                }
+
+                is FavoriteState.Stable -> {
+                    FavoriteStable(
+                        users = state.users,
+                        onClickUser = { state.eventSink(FavoriteEvent.NavigateDetail(it.id)) }
+                    )
+                }
             }
         }
     }
@@ -59,8 +63,7 @@ internal fun FavoriteContent(
 private fun FavoriteContentPreview() {
     CircuitSampleTheme {
         FavoriteContent(
-            state = FavoriteState(
-                isLoading = false,
+            state = FavoriteState.Stable(
                 users = List(30) { index ->
                     User(
                         id = "user_$index",
