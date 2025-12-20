@@ -26,7 +26,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun MoreMenuItem(
+internal fun MoreMenuItem(
     icon: DrawableResource,
     labelRes: StringResource,
     onClick: () -> Unit,

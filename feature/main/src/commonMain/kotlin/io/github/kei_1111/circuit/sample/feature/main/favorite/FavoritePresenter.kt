@@ -7,8 +7,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.retained.rememberRetained
-import com.slack.circuit.runtime.CircuitUiEvent
-import com.slack.circuit.runtime.CircuitUiState
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
 import dev.zacsweers.metro.Assisted
@@ -19,16 +17,6 @@ import io.github.kei_1111.circuit.sample.core.domain.FetchFavoriteUsersUseCase
 import io.github.kei_1111.circuit.sample.core.model.User
 import io.github.kei_1111.circuit.sample.core.navigation.DetailScreen
 import io.github.kei_1111.circuit.sample.core.navigation.FavoriteScreen
-
-data class FavoriteState(
-    val isLoading: Boolean = true,
-    val users: List<User> = emptyList(),
-    val eventSink: (FavoriteEvent) -> Unit,
-) : CircuitUiState
-
-sealed interface FavoriteEvent : CircuitUiEvent {
-    data class NavigateDetail(val userId: String) : FavoriteEvent
-}
 
 class FavoritePresenter @AssistedInject constructor(
     @Assisted private val navigator: Navigator,

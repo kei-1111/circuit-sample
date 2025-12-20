@@ -1,4 +1,4 @@
-package io.github.kei_1111.circuit.sample.feature.main
+package io.github.kei_1111.circuit.sample.feature.main.main
 
 import circuit_sample.feature.main.generated.resources.Res
 import circuit_sample.feature.main.generated.resources.favorite

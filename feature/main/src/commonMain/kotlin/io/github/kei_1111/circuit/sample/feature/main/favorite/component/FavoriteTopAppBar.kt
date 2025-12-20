@@ -14,7 +14,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoriteTopAppBar(
+internal fun FavoriteTopAppBar(
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(

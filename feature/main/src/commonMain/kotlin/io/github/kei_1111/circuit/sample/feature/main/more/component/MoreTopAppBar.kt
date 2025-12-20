@@ -14,7 +14,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MoreTopAppBar(
+internal fun MoreTopAppBar(
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
