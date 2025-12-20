@@ -16,7 +16,7 @@ import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailTopAppBar(
+internal fun DetailTopAppBar(
     onClickBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {

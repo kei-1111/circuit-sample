@@ -1,5 +1,6 @@
 package io.github.kei_1111.circuit.sample.feature.detail
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.slack.circuit.codegen.annotations.CircuitInject
@@ -15,6 +16,6 @@ fun Detail(
 ) {
     DetailContent(
         state = state,
-        modifier = modifier
+        modifier = modifier.fillMaxSize(),
     )
 }
