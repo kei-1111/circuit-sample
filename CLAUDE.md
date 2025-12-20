@@ -21,7 +21,7 @@ Compose Multiplatform + Circuit (Slack) によるサンプルアプリ。Clean A
 
 1. **PresenterはUseCaseを経由** - Repositoryを直接使用しない
 2. **UIはステートレス** - Stateを受け取り、eventSinkでイベント通知
-3. **State/Event/Presenterは同一ファイル** - `XxxPresenter.kt`に定義
+3. **State/Event/Presenterは別ファイル** - `XxxState.kt`、`XxxEvent.kt`、`XxxPresenter.kt`に分離
 4. **Screenは`core/navigation`に集約** - `Screens.kt`に全Screen定義
 
 ### よくある間違い
@@ -44,6 +44,8 @@ Compose Multiplatform + Circuit (Slack) によるサンプルアプリ。Clean A
 | 内容 | 参照先 |
 |------|--------|
 | Presenter実装例 | `feature/settings/src/commonMain/.../SettingsPresenter.kt` |
+| State実装例 | `feature/settings/src/commonMain/.../SettingsState.kt` |
+| Event実装例 | `feature/settings/src/commonMain/.../SettingsEvent.kt` |
 | UI実装例 | `feature/settings/src/commonMain/.../Settings.kt` |
 | UseCase実装例 | `core/domain/src/commonMain/.../GetThemeUseCase.kt` |
 | DI設定 (共通) | `shared/src/commonMain/.../di/AppGraph.kt` |
