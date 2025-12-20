@@ -10,8 +10,6 @@ import androidx.compose.runtime.setValue
 import circuit_sample.feature.settings.generated.resources.Res
 import circuit_sample.feature.settings.generated.resources.settings_saved
 import com.slack.circuit.codegen.annotations.CircuitInject
-import com.slack.circuit.runtime.CircuitUiEvent
-import com.slack.circuit.runtime.CircuitUiState
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
 import dev.zacsweers.metro.Assisted
@@ -25,30 +23,6 @@ import io.github.kei_1111.circuit.sample.core.domain.SetThemeUseCase
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import io.github.kei_1111.circuit.sample.core.navigation.SettingsScreen
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.StringResource
-
-sealed interface SettingsSideEffect {
-    data class ShowSnackbar(val messageRes: StringResource) : SettingsSideEffect
-}
-
-data class SettingsState(
-    val theme: UserPreferences.Theme = UserPreferences.Theme.SYSTEM,
-    val seedColor: UserPreferences.SeedColor = UserPreferences.SeedColor.Default,
-    val showColorPicker: Boolean = false,
-    val canSave: Boolean = false,
-    val sideEffect: SettingsSideEffect? = null,
-    val eventSink: (SettingsEvent) -> Unit,
-) : CircuitUiState
-
-sealed interface SettingsEvent : CircuitUiEvent {
-    data object NavigateBack : SettingsEvent
-    data object ClearSideEffect : SettingsEvent
-    data object SaveSettings : SettingsEvent
-    data class UpdateTheme(val theme: UserPreferences.Theme) : SettingsEvent
-    data class UpdateSeedColor(val seedColor: UserPreferences.SeedColor) : SettingsEvent
-    data object ShowColorPicker : SettingsEvent
-    data object HideColorPicker : SettingsEvent
-}
 
 class SettingsPresenter @AssistedInject constructor(
     @Assisted private val navigator: Navigator,

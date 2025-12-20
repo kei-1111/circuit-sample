@@ -35,7 +35,7 @@ import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun SettingsItem(
+internal fun SettingsItem(
     userPreferences: UserPreferences,
     selected: Boolean,
     onClick: () -> Unit,

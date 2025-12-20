@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ColorPickerBottomSheet(
+internal fun ColorPickerBottomSheet(
     initialColor: Color,
     onDismiss: () -> Unit,
     onChangeColor: (Color) -> Unit,

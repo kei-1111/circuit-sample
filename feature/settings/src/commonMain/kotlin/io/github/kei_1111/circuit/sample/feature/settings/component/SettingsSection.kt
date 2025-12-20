@@ -16,7 +16,7 @@ import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTh
 import io.github.kei_1111.circuit.sample.core.model.UserPreferences
 
 @Composable
-fun <T : UserPreferences> SettingsSection(
+internal fun <T : UserPreferences> SettingsSection(
     title: String,
     items: List<T>,
     selectedItem: T,
