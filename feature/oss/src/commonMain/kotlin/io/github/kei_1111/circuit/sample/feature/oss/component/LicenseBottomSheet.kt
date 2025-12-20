@@ -15,6 +15,8 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
+import androidx.compose.material3.SheetValue
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -22,12 +24,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
+import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LicenseBottomSheet(
+internal fun LicenseBottomSheet(
     libraryName: String,
     licenseNames: String?,
     licenseContent: String,
@@ -85,6 +89,30 @@ fun LicenseBottomSheet(
                     .nestedScroll(nestedScrollConnection)
                     .verticalScroll(scrollState)
                     .padding(vertical = 16.dp),
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+@Preview
+private fun LicenseBottomSheetPreview() {
+    val sheetState = SheetState(
+        skipPartiallyExpanded = true,
+        positionalThreshold = { 0f },
+        velocityThreshold = { 0f },
+        initialValue = SheetValue.Expanded,
+    )
+
+    CircuitSampleTheme {
+        Surface {
+            LicenseBottomSheet(
+                libraryName = "Circuit",
+                licenseNames = "Apache License 2.0",
+                licenseContent = "TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION",
+                onDismiss = {},
+                sheetState = sheetState,
             )
         }
     }

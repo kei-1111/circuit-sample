@@ -1,94 +1,20 @@
 package io.github.kei_1111.circuit.sample.feature.oss
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.mikepenz.aboutlibraries.ui.compose.LibraryDefaults
-import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
-import com.mikepenz.aboutlibraries.ui.compose.m3.libraryColors
-import com.mikepenz.aboutlibraries.ui.compose.util.strippedLicenseContent
 import com.slack.circuit.codegen.annotations.CircuitInject
 import io.github.kei_1111.circuit.sample.core.common.AppScope
-import io.github.kei_1111.circuit.sample.core.designsystem.theme.CircuitSampleTheme
 import io.github.kei_1111.circuit.sample.core.navigation.OssScreen
-import io.github.kei_1111.circuit.sample.feature.oss.component.LicenseBottomSheet
-import io.github.kei_1111.circuit.sample.feature.oss.component.OssTopAppBar
+import io.github.kei_1111.circuit.sample.feature.oss.component.OssContent
 
-@OptIn(ExperimentalMaterial3Api::class)
 @CircuitInject(OssScreen::class, AppScope::class)
 @Composable
 fun Oss(
     state: OssState,
     modifier: Modifier = Modifier,
 ) {
-    state.selectedLibrary?.let { library ->
-        LicenseBottomSheet(
-            libraryName = library.name,
-            licenseNames = library.licenses.joinToString(" / ") { it.name },
-            licenseContent = library.strippedLicenseContent,
-            onDismiss = { state.eventSink(OssEvent.DismissLicense) },
-        )
-    }
-
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            OssTopAppBar(
-                onClickBack = { state.eventSink(OssEvent.NavigateBack) }
-            )
-        }
-    ) { innerPadding ->
-        LibrariesContainer(
-            libraries = state.libraries,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            libraryModifier = Modifier.clip(RoundedCornerShape(8.dp)),
-            contentPadding = PaddingValues(16.dp),
-            colors = LibraryDefaults.libraryColors(
-                libraryBackgroundColor = MaterialTheme.colorScheme.surfaceContainer,
-                libraryContentColor = MaterialTheme.colorScheme.onSurface,
-            ),
-            padding = LibraryDefaults.libraryPadding(
-                contentPadding = PaddingValues(8.dp)
-            ),
-            dimensions = LibraryDefaults.libraryDimensions(
-                itemSpacing = 16.dp
-            ),
-            textStyles = LibraryDefaults.libraryTextStyles(
-                nameTextStyle = MaterialTheme.typography.titleMedium,
-                versionTextStyle = MaterialTheme.typography.labelMedium,
-                authorTextStyle = MaterialTheme.typography.labelSmall,
-                licensesTextStyle = MaterialTheme.typography.labelMedium,
-            ),
-            shapes = LibraryDefaults.libraryShapes(
-                chipShape = RoundedCornerShape(4.dp),
-            ),
-            onLibraryClick = { state.eventSink(OssEvent.ShowLicense(it)) },
-            licenseDialogBody = null,
-        )
-    }
-}
-
-@Composable
-@Preview
-private fun OssPreview() {
-    CircuitSampleTheme {
-        Oss(
-            state = OssState(
-                libraries = null,
-                selectedLibrary = null,
-                eventSink = {}
-            )
-        )
-    }
+    OssContent(
+        state = state,
+        modifier = modifier
+    )
 }

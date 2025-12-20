@@ -18,7 +18,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OssTopAppBar(
+internal fun OssTopAppBar(
     onClickBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
