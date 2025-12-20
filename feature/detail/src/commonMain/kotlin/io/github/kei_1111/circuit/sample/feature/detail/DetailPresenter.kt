@@ -4,8 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import com.slack.circuit.codegen.annotations.CircuitInject
-import com.slack.circuit.runtime.CircuitUiEvent
-import com.slack.circuit.runtime.CircuitUiState
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
 import dev.zacsweers.metro.Assisted
@@ -15,25 +13,6 @@ import io.github.kei_1111.circuit.sample.core.common.AppScope
 import io.github.kei_1111.circuit.sample.core.domain.FetchUserUseCase
 import io.github.kei_1111.circuit.sample.core.model.User
 import io.github.kei_1111.circuit.sample.core.navigation.DetailScreen
-
-sealed interface DetailState : CircuitUiState {
-    val eventSink: (DetailEvent) -> Unit
-
-    data object Loading : DetailState { override val eventSink: (DetailEvent) -> Unit = {} }
-
-    data class Stable(
-        val user: User,
-        override val eventSink: (DetailEvent) -> Unit,
-    ) : DetailState
-
-    data class Error(
-        override val eventSink: (DetailEvent) -> Unit,
-    ) : DetailState
-}
-
-sealed interface DetailEvent : CircuitUiEvent {
-    data object NavigateBack : DetailEvent
-}
 
 class DetailPresenter @AssistedInject constructor(
     @Assisted private val screen: DetailScreen,
